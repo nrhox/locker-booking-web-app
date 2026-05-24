@@ -1,25 +1,16 @@
-import { useMemo, useState } from "react";
-import { MapPin } from "lucide-react";
-import { Link } from "react-router-dom";
-import { SectionContainer } from "@/components/shared/SectionContainer";
 import { PageHeader } from "@/components/shared/PageHeader";
+import { SectionContainer } from "@/components/shared/SectionContainer";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import { EmptyState } from "@/components/ui/EmptyState";
-import { useLocationStore } from "@/stores/location.store";
+import { dummyLocations } from "@/dummy/location.dummy";
+import { MapPin } from "lucide-react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
-export function LocationListPage() {
+export function LocationPage() {
   const [search, setSearch] = useState("");
-  const locations = useLocationStore((state) => state.locations);
-  const filteredLocations = useMemo(() => {
-    const keyword = search.trim().toLowerCase();
-    if (!keyword) return locations;
-    return locations.filter((location) =>
-      [location.name, location.code, location.address, location.description]
-        .filter(Boolean)
-        .some((value) => value?.toLowerCase().includes(keyword)),
-    );
-  }, [locations, search]);
+  const filteredLocations = dummyLocations;
 
   return (
     <SectionContainer>
@@ -28,7 +19,7 @@ export function LocationListPage() {
         description="Find a public locker location and start a booking."
       />
       <div className="mt-5">
-        <label className="block">
+        <label className="block max-w-lg">
           <span className="mb-1.5 block text-sm font-medium text-slate-700">
             Search location
           </span>

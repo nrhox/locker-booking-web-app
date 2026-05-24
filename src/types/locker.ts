@@ -1,5 +1,6 @@
 import type {
   DateTimeUtc,
+  LockerSize,
   LockerStatus,
   LockerVisualizationStatus,
   PublicId,
@@ -13,8 +14,7 @@ export type LockerPosition = {
 export type Locker = {
   id: PublicId;
   locationId: PublicId;
-  code: string;
-  label?: string | null;
+  size: LockerSize;
   status: LockerStatus;
   position?: LockerPosition | null;
   createdAt: DateTimeUtc;
@@ -39,7 +39,6 @@ export type LockerVisualization = {
 
 export type LockerFormValues = {
   locationId: PublicId;
-  code: string;
-  label: string;
+  size: LockerSize;
   status: LockerStatus;
 };

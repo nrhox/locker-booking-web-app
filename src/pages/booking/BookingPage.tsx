@@ -1,15 +1,13 @@
-import { Link } from "react-router-dom";
-import { SectionContainer } from "@/components/shared/SectionContainer";
 import { PageHeader } from "@/components/shared/PageHeader";
+import { SectionContainer } from "@/components/shared/SectionContainer";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import { EmptyState } from "@/components/ui/EmptyState";
-import { useBookingStore } from "@/stores/booking.store";
+import { dummyBookings } from "@/dummy/booking.dummy";
 import { formatDateTime } from "@/utils/date";
+import { Link } from "react-router-dom";
 
-export function BookingListPage() {
-  const bookings = useBookingStore((state) => state.bookings);
-  const active = bookings.filter((booking) => booking.status === "ACTIVE");
+export function BookingPage() {
   return (
     <SectionContainer>
       <PageHeader
@@ -17,13 +15,13 @@ export function BookingListPage() {
         description="Open and close commands are mocked until hardware/backend is available."
       />
       <div className="mt-5 space-y-3">
-        {active.length === 0 ? (
+        {[].length === 0 ? (
           <EmptyState
             title="No active bookings"
             description="Book a locker from the locations page."
           />
         ) : null}
-        {active.map((booking) => (
+        {dummyBookings.map((booking) => (
           <Link
             key={booking.id}
             to={`/bookings/${booking.id}`}

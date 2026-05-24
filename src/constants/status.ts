@@ -1,5 +1,6 @@
 import type {
   BookingStatus,
+  LockerSize,
   LockerStatus,
   LockerVisualizationStatus,
   SelectOption,
@@ -21,6 +22,13 @@ export const LOCKER_STATUS_OPTIONS: SelectOption<LockerStatus>[] = [
   { label: "Available", value: "AVAILABLE" },
   { label: "Maintenance", value: "MAINTENANCE" },
   { label: "Disabled", value: "DISABLED" },
+];
+
+export const LOCKER_SIZE_OPTION: SelectOption<LockerSize>[] = [
+  { label: "Small", value: "SMALL" },
+  { label: "Medium", value: "MEDIUM" },
+  { label: "Large", value: "LARGE" },
+  { label: "Extra", value: "EXTRA" },
 ];
 
 export const BOOKING_STATUS_OPTIONS: SelectOption<BookingStatus>[] = [

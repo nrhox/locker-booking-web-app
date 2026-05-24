@@ -1,27 +1,24 @@
-import { useState } from "react";
-import { useParams } from "react-router-dom";
-import { SectionContainer } from "@/components/shared/SectionContainer";
 import { PageHeader } from "@/components/shared/PageHeader";
+import { SectionContainer } from "@/components/shared/SectionContainer";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Modal } from "@/components/ui/Modal";
-import { useBookingStore } from "@/stores/booking.store";
+import { dummyBookings } from "@/dummy/booking.dummy";
 import { formatDateTime } from "@/utils/date";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 export function BookingDetailPage() {
   const { id = "" } = useParams();
   const [cancelModalOpen, setCancelModalOpen] = useState(false);
-  const { cancelBooking, getById, isLockerOpen, toggleLockerAccess } =
-    useBookingStore();
-  const booking = getById(id);
-  const lockerOpen = booking ? isLockerOpen(booking.id) : false;
+  const booking = dummyBookings.find((d) => d.id === id);
+  const lockerOpen = false;
   const canUseActions = booking?.status === "ACTIVE";
 
   const confirmCancel = () => {
     if (!booking) return;
-    cancelBooking(booking.id);
     setCancelModalOpen(false);
   };
 
@@ -95,7 +92,6 @@ export function BookingDetailPage() {
                   type="button"
                   variant="secondary"
                   disabled={!canUseActions}
-                  onClick={() => toggleLockerAccess(booking.id)}
                 >
                   {lockerOpen ? "Close locker" : "Open locker"}
                 </Button>

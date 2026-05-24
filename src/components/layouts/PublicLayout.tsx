@@ -1,7 +1,7 @@
-import { LockKeyhole } from "lucide-react";
-import { Link, Outlet } from "react-router-dom";
 import { SectionContainer } from "@/components/shared/SectionContainer";
 import { ROUTES } from "@/constants/routes";
+import { LockKeyhole } from "lucide-react";
+import { Link, Outlet } from "react-router-dom";
 
 export function PublicLayout() {
   return (

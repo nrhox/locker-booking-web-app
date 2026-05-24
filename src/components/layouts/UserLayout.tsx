@@ -1,20 +1,21 @@
-import { CalendarCheck, History, MapPin } from "lucide-react";
-import { Link, NavLink, Outlet } from "react-router-dom";
 import { BottomNavigation } from "@/components/shared/BottomNavigation";
 import { SectionContainer } from "@/components/shared/SectionContainer";
 import { UserAvatar } from "@/components/shared/UserAvatar";
 import { ROUTES } from "@/constants/routes";
-import { useAuth } from "@/hooks/useAuth";
+import { useAppSelector } from "@/hooks";
 import { cn } from "@/utils/cn";
+import { CalendarCheck, History, MapPin } from "lucide-react";
+import { Link, NavLink, Outlet } from "react-router-dom";
 
 const items = [
   { label: "Locations", to: ROUTES.locations, icon: MapPin },
   { label: "Bookings", to: ROUTES.bookings, icon: CalendarCheck },
-  { label: "History", to: ROUTES.bookingHistory, icon: History },
+  { label: "History", to: ROUTES.History, icon: History },
 ];
 
 export function UserLayout() {
-  const { user } = useAuth();
+  const user = useAppSelector((state) => state.auth.user);
+
   return (
     <div className="min-h-svh bg-slate-50 pb-16 sm:pb-0">
       <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/95 backdrop-blur">

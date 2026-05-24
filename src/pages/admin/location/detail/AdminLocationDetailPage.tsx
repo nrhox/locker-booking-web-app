@@ -1,4 +1,3 @@
-import { useParams } from "react-router-dom";
 import { InputField } from "@/components/forms/InputField";
 import { TextareaField } from "@/components/forms/TextareaField";
 import { PageHeader } from "@/components/shared/PageHeader";
@@ -6,15 +5,15 @@ import { SectionContainer } from "@/components/shared/SectionContainer";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import { EmptyState } from "@/components/ui/EmptyState";
-import { useLocationStore } from "@/stores/location.store";
-import { useLockerStore } from "@/stores/locker.store";
-
-const noop = () => undefined;
+import { dummyLocations } from "@/dummy/location.dummy";
+import { dummyLockers } from "@/dummy/locker.dummy";
+import { useParams } from "react-router-dom";
 
 export function AdminLocationDetailPage() {
   const { id = "" } = useParams();
-  const location = useLocationStore((state) => state.getById(id));
-  const lockers = useLockerStore((state) => state.getByLocationId(id));
+
+  const location = dummyLocations.find((v) => v.id === id);
+  const lockers = dummyLockers;
 
   return (
     <SectionContainer>
@@ -35,40 +34,30 @@ export function AdminLocationDetailPage() {
                 name="name"
                 label="Name"
                 value={location.name}
-                onChange={noop}
-                onBlur={noop}
                 disabled
               />
               <InputField
                 name="code"
                 label="Code"
                 value={location.code}
-                onChange={noop}
-                onBlur={noop}
                 disabled
               />
               <InputField
                 name="status"
                 label="Status"
                 value={location.status}
-                onChange={noop}
-                onBlur={noop}
                 disabled
               />
               <TextareaField
                 name="address"
                 label="Address"
                 value={location.address ?? ""}
-                onChange={noop}
-                onBlur={noop}
                 disabled
               />
               <TextareaField
                 name="description"
                 label="Description"
                 value={location.description ?? ""}
-                onChange={noop}
-                onBlur={noop}
                 disabled
               />
             </div>
@@ -91,9 +80,8 @@ export function AdminLocationDetailPage() {
               {lockers.map((locker) => (
                 <Card key={locker.id}>
                   <h3 className="font-semibold text-slate-950">
-                    {locker.code}
+                    {locker.size}
                   </h3>
-                  <p className="mt-1 text-sm text-slate-500">{locker.label}</p>
                   <Badge
                     className="mt-3"
                     tone={

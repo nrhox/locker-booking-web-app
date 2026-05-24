@@ -1,28 +1,25 @@
-import { LockKeyhole } from "lucide-react";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
 import { SelectField } from "@/components/forms/SelectField";
 import { SubmitButton } from "@/components/forms/SubmitButton";
 import { SectionContainer } from "@/components/shared/SectionContainer";
 import { Card } from "@/components/ui/Card";
 import { ROUTES } from "@/constants/routes";
 import { USER_ROLE_OPTIONS } from "@/constants/status";
-import { useAuth } from "@/hooks/useAuth";
 import type { UserRole } from "@/types/common";
+import { useFormik } from "formik";
+import { LockKeyhole } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import * as Yup from "yup";
 
 type LoginValues = { role: UserRole };
 
 export function LoginPage() {
   const navigate = useNavigate();
-  const { loginAs } = useAuth();
   const formik = useFormik<LoginValues>({
     initialValues: { role: "USER" },
     validationSchema: Yup.object({
       role: Yup.mixed<UserRole>().oneOf(["USER", "ADMIN"]).required(),
     }),
     onSubmit: (values) => {
-      loginAs(values.role);
       navigate(
         values.role === "ADMIN" ? ROUTES.adminDashboard : ROUTES.locations,
       );

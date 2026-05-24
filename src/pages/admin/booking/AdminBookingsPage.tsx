@@ -1,15 +1,18 @@
-import { SectionContainer } from "@/components/shared/SectionContainer";
 import { PageHeader } from "@/components/shared/PageHeader";
+import { SectionContainer } from "@/components/shared/SectionContainer";
 import { Table, type TableColumn } from "@/components/shared/Table";
 import { Badge } from "@/components/ui/Badge";
 import { Pagination } from "@/components/ui/Pagination";
-import { dummyBookingHistoryResponse } from "@/dummy/booking.dummy";
-import { useBookingStore } from "@/stores/booking.store";
+import {
+  dummyBookingHistoryResponse,
+  dummyBookings,
+} from "@/dummy/booking.dummy";
 import type { Booking } from "@/types/booking";
 import { formatDateTime } from "@/utils/date";
 
 export function AdminBookingsPage() {
-  const bookings = useBookingStore((state) => state.bookings);
+  const bookings = dummyBookings;
+
   const columns: TableColumn<Booking>[] = [
     {
       key: "user",

@@ -1,18 +1,19 @@
+import { Button } from "@/components/ui/Button";
+import { Drawer } from "@/components/ui/Drawer";
+import { ROUTES } from "@/constants/routes";
+import { useAppSelector } from "@/hooks";
+import { toggleAdminDrawer } from "@/stores/uiSlice";
+import { cn } from "@/utils/cn";
 import {
   BookOpen,
   CalendarRange,
   LayoutDashboard,
   LogOut,
-  Menu,
   MapPinned,
+  Menu,
 } from "lucide-react";
+import { useDispatch } from "react-redux";
 import { NavLink, Outlet } from "react-router-dom";
-import { Drawer } from "@/components/ui/Drawer";
-import { Button } from "@/components/ui/Button";
-import { ROUTES } from "@/constants/routes";
-import { useAuth } from "@/hooks/useAuth";
-import { useUiStore } from "@/stores/ui.store";
-import { cn } from "@/utils/cn";
 
 const nav = [
   { label: "Dashboard", to: ROUTES.adminDashboard, icon: LayoutDashboard },
@@ -45,11 +46,12 @@ function AdminNav() {
 }
 
 export function AdminLayout() {
-  const { user, logout } = useAuth();
-  const { adminDrawerOpen, openAdminDrawer, closeAdminDrawer } = useUiStore();
+  const user = useAppSelector((state) => state.auth.user);
+  const isDrawerOpen = useAppSelector((state) => state.ui.adminDrawerOpen);
+  const dispatch = useDispatch();
   return (
-    <div className="min-h-svh bg-slate-50 lg:grid lg:grid-cols-[260px_1fr]">
-      <aside className="hidden border-r border-slate-200 bg-white p-4 lg:block">
+    <div className="min-h-svh bg-slate-50">
+      <aside className="fixed top-0 hidden min-h-svh w-65 border-r border-slate-200 bg-white p-4 lg:block">
         <div className="mb-6 flex items-center gap-2 font-semibold text-slate-950">
           <BookOpen className="h-5 w-5 text-teal-700" />
           Admin Console
@@ -57,13 +59,13 @@ export function AdminLayout() {
         <AdminNav />
       </aside>
       <Drawer
-        open={adminDrawerOpen}
+        open={isDrawerOpen}
         title="Admin Console"
-        onClose={closeAdminDrawer}
+        onClose={() => dispatch(toggleAdminDrawer())}
       >
         <AdminNav />
       </Drawer>
-      <div>
+      <div className="lg:ml-65">
         <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/95 backdrop-blur">
           <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
             <div className="flex items-center gap-3">
@@ -71,7 +73,7 @@ export function AdminLayout() {
                 type="button"
                 variant="ghost"
                 className="h-10 w-10 px-0 lg:hidden"
-                onClick={openAdminDrawer}
+                onClick={() => dispatch(toggleAdminDrawer())}
                 aria-label="Open admin navigation"
               >
                 <Menu className="h-5 w-5" />
@@ -88,7 +90,7 @@ export function AdminLayout() {
             <Button
               type="button"
               variant="ghost"
-              onClick={logout}
+              onClick={() => console.log("logout")}
               icon={<LogOut className="h-4 w-4" />}
             >
               Logout

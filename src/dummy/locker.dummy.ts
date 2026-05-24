@@ -5,8 +5,7 @@ export const dummyLockers: Locker[] = [
   {
     id: "a4374f6d-41a6-48a7-9987-01917c16dd97",
     locationId: "cf726a74-52e9-46d1-a2c2-6f6c084bc4f6",
-    code: "A-001",
-    label: "Aisle A Locker 001",
+    size: "EXTRA",
     status: "AVAILABLE",
     position: { row: 1, column: 1 },
     createdAt: "2026-05-24T01:00:00Z",
@@ -15,8 +14,7 @@ export const dummyLockers: Locker[] = [
   {
     id: "ba8e42df-4d12-45d9-a0c8-ff6d717d7880",
     locationId: "cf726a74-52e9-46d1-a2c2-6f6c084bc4f6",
-    code: "A-002",
-    label: "Aisle A Locker 002",
+    size: "MEDIUM",
     status: "AVAILABLE",
     position: { row: 1, column: 2 },
     createdAt: "2026-05-24T01:00:00Z",
@@ -25,8 +23,7 @@ export const dummyLockers: Locker[] = [
   {
     id: "d4b035fb-e4b9-4a1a-a601-8db481d9b7f6",
     locationId: "cf726a74-52e9-46d1-a2c2-6f6c084bc4f6",
-    code: "A-003",
-    label: "Maintenance locker",
+    size: "SMALL",
     status: "MAINTENANCE",
     position: { row: 1, column: 3 },
     createdAt: "2026-05-24T01:00:00Z",

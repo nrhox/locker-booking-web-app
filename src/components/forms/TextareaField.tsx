@@ -14,8 +14,8 @@ type TextareaFieldProps = Omit<
   label: string;
   error?: string;
   touched?: boolean;
-  onChange: ChangeEventHandler<HTMLTextAreaElement>;
-  onBlur: FocusEventHandler<HTMLTextAreaElement>;
+  onChange?: ChangeEventHandler<HTMLTextAreaElement>;
+  onBlur?: FocusEventHandler<HTMLTextAreaElement>;
 };
 
 export function TextareaField({

@@ -1,12 +1,12 @@
-import { CalendarCheck, History, MapPin, UserCircle } from "lucide-react";
-import { NavLink } from "react-router-dom";
 import { ROUTES } from "@/constants/routes";
 import { cn } from "@/utils/cn";
+import { CalendarCheck, History, MapPin, UserCircle } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
 const items = [
   { label: "Locations", to: ROUTES.locations, icon: MapPin },
   { label: "Bookings", to: ROUTES.bookings, icon: CalendarCheck },
-  { label: "History", to: ROUTES.bookingHistory, icon: History },
+  { label: "History", to: ROUTES.History, icon: History },
   { label: "Profile", to: ROUTES.profile, icon: UserCircle },
 ];
 

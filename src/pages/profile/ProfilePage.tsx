@@ -1,25 +1,32 @@
-import { ShieldAlert, Trash2, LogOut } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { SectionContainer } from "@/components/shared/SectionContainer";
 import { PageHeader } from "@/components/shared/PageHeader";
+import { SectionContainer } from "@/components/shared/SectionContainer";
 import { UserAvatar } from "@/components/shared/UserAvatar";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { ROUTES } from "@/constants/routes";
-import { useAuth } from "@/hooks/useAuth";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { setLogOut } from "@/stores/authSlice";
+import { LogOut, ShieldAlert, Trash2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export function ProfilePage() {
   const navigate = useNavigate();
-  const { user, logout, deleteAccount } = useAuth();
+  const status = useAppSelector((state) => state.auth.status);
+  const user = useAppSelector((state) => state.auth.user);
+  const dispatch = useAppDispatch();
+
+  if (status === "unauthorized" && !user) {
+    navigate(ROUTES.login);
+  }
 
   const handleLogout = () => {
-    logout();
+    dispatch(setLogOut());
     navigate(ROUTES.login);
   };
 
   const handleDeleteAccount = () => {
-    deleteAccount();
+    dispatch(setLogOut());
     navigate(ROUTES.login);
   };
 

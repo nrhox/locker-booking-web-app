@@ -1,8 +1,10 @@
-import type { ReactNode } from "react";
-import { Navigate, useLocation } from "react-router-dom";
 import { ROUTES } from "@/constants/routes";
-import { useAuth } from "@/hooks/useAuth";
+import { dummyAdmin } from "@/dummy/auth.dummy";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { setAuth } from "@/stores/authSlice";
 import type { UserRole } from "@/types/common";
+import { useEffect, type ReactNode } from "react";
+import { useNavigate } from "react-router";
 
 export function ProtectedRoute({
   children,
@@ -11,18 +13,34 @@ export function ProtectedRoute({
   children: ReactNode;
   role?: UserRole;
 }) {
-  const location = useLocation();
-  const { isAuthenticated, user } = useAuth();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const statusAuth = useAppSelector((state) => state.auth.status);
 
-  if (!isAuthenticated) {
-    return (
-      <Navigate replace to={ROUTES.login} state={{ from: location.pathname }} />
-    );
+  useEffect(() => {
+    if (statusAuth === "loading") {
+      dispatch(setAuth(dummyAdmin));
+    }
+  }, [dispatch, statusAuth]);
+
+  if (statusAuth === "unauthorized") {
+    navigate(ROUTES.login);
   }
 
-  if (role && user?.role !== role) {
-    return <Navigate replace to={ROUTES.locations} />;
-  }
+  console.log(role);
+  // const location = useLocation();
+  // const isAuthenticated = true;
+  // const user = dummyUser;
+
+  // if (!isAuthenticated) {
+  //   return (
+  //     <Navigate replace to={ROUTES.login} state={{ from: location.pathname }} />
+  //   );
+  // }
+
+  // if (role && user?.role !== role) {
+  //   return <Navigate replace to={ROUTES.locations} />;
+  // }
 
   return children;
 }

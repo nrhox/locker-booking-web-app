@@ -1,20 +1,20 @@
-import { Navigate, createBrowserRouter } from "react-router-dom";
 import { AdminLayout } from "@/components/layouts/AdminLayout";
 import { PublicLayout } from "@/components/layouts/PublicLayout";
 import { UserLayout } from "@/components/layouts/UserLayout";
 import { ROUTES } from "@/constants/routes";
-import { AdminBookingsPage } from "@/features/admin/AdminBookingsPage";
-import { AdminDashboardPage } from "@/features/admin/AdminDashboardPage";
-import { AdminLocationCreatePage } from "@/features/admin/AdminLocationCreatePage";
-import { AdminLocationDetailPage } from "@/features/admin/AdminLocationDetailPage";
-import { AdminLocationsPage } from "@/features/admin/AdminLocationsPage";
-import { LoginPage } from "@/features/auth/LoginPage";
-import { ProfilePage } from "@/features/auth/ProfilePage";
-import { BookingDetailPage } from "@/features/bookings/BookingDetailPage";
-import { BookingHistoryPage } from "@/features/bookings/BookingHistoryPage";
-import { BookingListPage } from "@/features/bookings/BookingListPage";
-import { LocationDetailPage } from "@/features/locations/LocationDetailPage";
-import { LocationListPage } from "@/features/locations/LocationListPage";
+import { AdminBookingsPage } from "@/pages/admin/booking/AdminBookingsPage";
+import { AdminDashboardPage } from "@/pages/admin/dashboard/AdminDashboardPage";
+import { AdminLocationsPage } from "@/pages/admin/location/AdminLocationsPage";
+import { AdminLocationCreatePage } from "@/pages/admin/location/create/AdminLocationCreatePage";
+import { AdminLocationDetailPage } from "@/pages/admin/location/detail/AdminLocationDetailPage";
+import { BookingPage } from "@/pages/booking/BookingPage";
+import { BookingDetailPage } from "@/pages/booking/detail/BookingDetailPage";
+import { HistoryPage } from "@/pages/history/HistoryPage";
+import { LocationDetailPage } from "@/pages/location/detail/LocationDetailPage";
+import { LocationPage } from "@/pages/location/LocationPage";
+import { LoginPage } from "@/pages/login/LoginPage";
+import { ProfilePage } from "@/pages/profile/ProfilePage";
+import { Navigate, createBrowserRouter } from "react-router-dom";
 import { ProtectedRoute } from "./ProtectedRoute";
 
 export const router = createBrowserRouter([
@@ -22,7 +22,7 @@ export const router = createBrowserRouter([
     path: "/",
     element: <PublicLayout />,
     children: [
-      { index: true, element: <Navigate replace to={ROUTES.locations} /> },
+      { index: true, element: <Navigate replace to={ROUTES.login} /> },
       { path: "login", element: <LoginPage /> },
     ],
   },
@@ -33,17 +33,17 @@ export const router = createBrowserRouter([
       </ProtectedRoute>
     ),
     children: [
-      { path: "locations", loader: () => null, element: <LocationListPage /> },
+      { path: "locations", loader: () => null, element: <LocationPage /> },
       {
         path: "locations/:id",
         loader: () => null,
         element: <LocationDetailPage />,
       },
-      { path: "bookings", loader: () => null, element: <BookingListPage /> },
+      { path: "bookings", loader: () => null, element: <BookingPage /> },
       {
-        path: "bookings/history",
+        path: "history",
         loader: () => null,
-        element: <BookingHistoryPage />,
+        element: <HistoryPage />,
       },
       {
         path: "bookings/:id",

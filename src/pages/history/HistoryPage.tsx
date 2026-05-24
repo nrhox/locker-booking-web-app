@@ -1,14 +1,14 @@
-import { Link } from "react-router-dom";
-import { SectionContainer } from "@/components/shared/SectionContainer";
 import { PageHeader } from "@/components/shared/PageHeader";
+import { SectionContainer } from "@/components/shared/SectionContainer";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import { EmptyState } from "@/components/ui/EmptyState";
-import { useBookingStore } from "@/stores/booking.store";
+import { dummyBookings } from "@/dummy/booking.dummy";
 import { formatDateTime } from "@/utils/date";
+import { Link } from "react-router-dom";
 
-export function BookingHistoryPage() {
-  const bookings = useBookingStore((state) => state.bookings);
+export function HistoryPage() {
+  const bookings = dummyBookings;
   return (
     <SectionContainer>
       <PageHeader

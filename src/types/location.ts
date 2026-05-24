@@ -9,7 +9,6 @@ export type Location = {
   description?: string | null;
   address?: string | null;
   status: LocationStatus;
-  timezone: string;
   createdAt: DateTimeUtc;
   updatedAt: DateTimeUtc;
 };

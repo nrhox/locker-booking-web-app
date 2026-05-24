@@ -1,9 +1,9 @@
+import { cn } from "@/utils/cn";
 import type {
   ChangeEventHandler,
   FocusEventHandler,
   InputHTMLAttributes,
 } from "react";
-import { cn } from "@/utils/cn";
 import { FormError } from "./FormError";
 
 type InputFieldProps = Omit<InputHTMLAttributes<HTMLInputElement>, "name"> & {
@@ -11,8 +11,8 @@ type InputFieldProps = Omit<InputHTMLAttributes<HTMLInputElement>, "name"> & {
   label: string;
   error?: string;
   touched?: boolean;
-  onChange: ChangeEventHandler<HTMLInputElement>;
-  onBlur: FocusEventHandler<HTMLInputElement>;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
+  onBlur?: FocusEventHandler<HTMLInputElement>;
 };
 
 export function InputField({

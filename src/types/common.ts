@@ -3,6 +3,7 @@ export type DateTimeUtc = string;
 
 export type UserRole = "USER" | "ADMIN";
 export type LockerStatus = "AVAILABLE" | "MAINTENANCE" | "DISABLED";
+export type LockerSize = "EXTRA" | "LARGE" | "MEDIUM" | "SMALL";
 export type BookingStatus = "ACTIVE" | "COMPLETED" | "CANCELLED" | "EXPIRED";
 export type LockerVisualizationStatus = "AVAILABLE" | "OCCUPIED" | "MY_BOOKING";
 export type OAuthProvider = "google" | "github" | "microsoft" | "apple";

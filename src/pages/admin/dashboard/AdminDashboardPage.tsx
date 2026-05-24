@@ -1,14 +1,14 @@
-import { SectionContainer } from "@/components/shared/SectionContainer";
 import { PageHeader } from "@/components/shared/PageHeader";
+import { SectionContainer } from "@/components/shared/SectionContainer";
 import { Card } from "@/components/ui/Card";
-import { useBookingStore } from "@/stores/booking.store";
-import { useLocationStore } from "@/stores/location.store";
-import { useLockerStore } from "@/stores/locker.store";
+import { dummyBookings } from "@/dummy/booking.dummy";
+import { dummyLocations } from "@/dummy/location.dummy";
+import { dummyLockers } from "@/dummy/locker.dummy";
 
 export function AdminDashboardPage() {
-  const locations = useLocationStore((state) => state.locations.length);
-  const lockers = useLockerStore((state) => state.lockers.length);
-  const bookings = useBookingStore((state) => state.bookings.length);
+  const locations = dummyLocations.length;
+  const lockers = dummyLockers.length;
+  const bookings = dummyBookings.length;
   return (
     <SectionContainer>
       <PageHeader

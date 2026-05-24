@@ -1,15 +1,15 @@
-import { Eye, Plus } from "lucide-react";
-import { Link } from "react-router-dom";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { SectionContainer } from "@/components/shared/SectionContainer";
 import { Table, type TableColumn } from "@/components/shared/Table";
 import { Badge } from "@/components/ui/Badge";
 import { ROUTES } from "@/constants/routes";
-import { useLocationStore } from "@/stores/location.store";
+import { dummyLocations } from "@/dummy/location.dummy";
 import type { Location } from "@/types/location";
+import { Eye, Plus } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export function AdminLocationsPage() {
-  const locations = useLocationStore((state) => state.locations);
+  const locations = dummyLocations;
   const columns: TableColumn<Location>[] = [
     {
       key: "name",
@@ -51,7 +51,7 @@ export function AdminLocationsPage() {
         action={
           <Link
             to={ROUTES.adminLocationNew}
-            className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-teal-700 bg-teal-700 px-4 text-sm font-medium text-white transition hover:bg-teal-800"
+            className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-teal-700 bg-teal-700 px-4 text-sm font-medium text-white! transition hover:bg-teal-800"
           >
             <Plus className="h-4 w-4" />
             Add location

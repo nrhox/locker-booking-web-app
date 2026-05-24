@@ -1,29 +1,24 @@
-import { useNavigate, useParams } from "react-router-dom";
-import { SectionContainer } from "@/components/shared/SectionContainer";
 import { PageHeader } from "@/components/shared/PageHeader";
+import { SectionContainer } from "@/components/shared/SectionContainer";
 import { Card } from "@/components/ui/Card";
-import { BookingForm } from "@/features/bookings/BookingForm";
-import { LockerVisualizationGrid } from "@/features/lockers/LockerVisualizationGrid";
 import { ROUTES } from "@/constants/routes";
-import { useAuth } from "@/hooks/useAuth";
-import { useBookingStore } from "@/stores/booking.store";
-import { useLocationStore } from "@/stores/location.store";
-import { useLockerStore } from "@/stores/locker.store";
+import { dummyLocations } from "@/dummy/location.dummy";
+import { dummyLockerVisualizationResponse } from "@/dummy/locker.dummy";
+import { BookingForm } from "@/components/pages/bookings/BookingForm";
+import { LockerVisualizationGrid } from "@/components/pages/lockers/LockerGrid";
 import type { CreateBookingRequest } from "@/types/booking";
+import { useNavigate, useParams } from "react-router-dom";
 
 export function LocationDetailPage() {
   const { id = "" } = useParams();
   const navigate = useNavigate();
-  const user = useAuth().user;
-  const location = useLocationStore((state) => state.getById(id));
-  const { visualization, selectedLockerId, selectLocker, markMyBooking } =
-    useLockerStore();
-  const createBooking = useBookingStore((state) => state.createBooking);
+  const location = dummyLocations.find((v) => v.id === id);
+  const visualization = dummyLockerVisualizationResponse.data;
+  const selectedLockerId = dummyLockerVisualizationResponse.data.locationId;
 
   const submitBooking = (request: CreateBookingRequest) => {
-    const booking = createBooking(request, user?.id ?? "anonymous", id);
-    markMyBooking(request.lockerId, booking.id);
     navigate(ROUTES.bookings);
+    console.log(request);
   };
 
   return (
@@ -36,7 +31,7 @@ export function LocationDetailPage() {
         <LockerVisualizationGrid
           lockers={visualization.lockers}
           selectedLockerId={selectedLockerId}
-          onSelect={selectLocker}
+          onSelect={(x) => console.log(x)}
         />
         <Card className="h-fit">
           <h2 className="text-lg font-semibold text-slate-950">

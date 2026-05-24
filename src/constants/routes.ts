@@ -3,7 +3,7 @@ export const ROUTES = {
   locations: "/locations",
   bookings: "/bookings",
   profile: "/profile",
-  bookingHistory: "/bookings/history",
+  History: "/history",
   adminDashboard: "/admin/dashboard",
   adminLocations: "/admin/locations",
   adminLocationNew: "/admin/locations/new",
