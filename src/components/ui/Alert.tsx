@@ -1,5 +1,5 @@
-import { AlertCircle } from 'lucide-react';
-import type { ReactNode } from 'react';
+import { AlertCircle } from "lucide-react";
+import type { ReactNode } from "react";
 
 export function Alert({ children }: { children: ReactNode }) {
   return (
@@ -9,4 +9,3 @@ export function Alert({ children }: { children: ReactNode }) {
     </div>
   );
 }
-

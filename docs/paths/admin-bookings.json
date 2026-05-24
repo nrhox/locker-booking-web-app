@@ -12,9 +12,24 @@
         { "$ref": "../components/parameters.json#/bookingStatus" },
         { "$ref": "../components/parameters.json#/from" },
         { "$ref": "../components/parameters.json#/to" },
-        { "name": "userId", "in": "query", "required": false, "schema": { "type": "string", "format": "uuid" } },
-        { "name": "lockerId", "in": "query", "required": false, "schema": { "type": "string", "format": "uuid" } },
-        { "name": "locationId", "in": "query", "required": false, "schema": { "type": "string", "format": "uuid" } }
+        {
+          "name": "userId",
+          "in": "query",
+          "required": false,
+          "schema": { "type": "string", "format": "uuid" }
+        },
+        {
+          "name": "lockerId",
+          "in": "query",
+          "required": false,
+          "schema": { "type": "string", "format": "uuid" }
+        },
+        {
+          "name": "locationId",
+          "in": "query",
+          "required": false,
+          "schema": { "type": "string", "format": "uuid" }
+        }
       ],
       "responses": {
         "200": {
@@ -27,7 +42,10 @@
                 "additionalProperties": false,
                 "properties": {
                   "message": { "type": "string", "examples": ["Success"] },
-                  "data": { "type": "array", "items": { "$ref": "../schemas/booking.json" } },
+                  "data": {
+                    "type": "array",
+                    "items": { "$ref": "../schemas/booking.json" }
+                  },
                   "meta": { "$ref": "../schemas/success-meta.json" }
                 }
               }

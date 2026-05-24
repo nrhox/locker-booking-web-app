@@ -22,7 +22,10 @@
                 "additionalProperties": false,
                 "properties": {
                   "message": { "type": "string", "examples": ["Success"] },
-                  "data": { "type": "array", "items": { "$ref": "../schemas/locker.json" } },
+                  "data": {
+                    "type": "array",
+                    "items": { "$ref": "../schemas/locker.json" }
+                  },
                   "meta": { "$ref": "../schemas/success-meta.json" }
                 }
               }

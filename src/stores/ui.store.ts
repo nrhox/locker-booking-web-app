@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
 type UiState = {
   adminDrawerOpen: boolean;
@@ -17,4 +17,3 @@ export const useUiStore = create<UiState>((set) => ({
   openModal: (key) => set({ activeModal: key }),
   closeModal: () => set({ activeModal: null }),
 }));
-

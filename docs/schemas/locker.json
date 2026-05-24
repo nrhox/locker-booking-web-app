@@ -7,9 +7,16 @@
   "properties": {
     "id": { "type": "string", "format": "uuid" },
     "locationId": { "type": "string", "format": "uuid" },
-    "code": { "type": "string", "pattern": "^[A-Z0-9_-]{1,32}$", "examples": ["A-001"] },
+    "code": {
+      "type": "string",
+      "pattern": "^[A-Z0-9_-]{1,32}$",
+      "examples": ["A-001"]
+    },
     "label": { "type": ["string", "null"], "examples": ["Aisle A Locker 001"] },
-    "status": { "type": "string", "enum": ["AVAILABLE", "MAINTENANCE", "DISABLED"] },
+    "status": {
+      "type": "string",
+      "enum": ["AVAILABLE", "MAINTENANCE", "DISABLED"]
+    },
     "position": {
       "type": ["object", "null"],
       "additionalProperties": false,

@@ -14,7 +14,10 @@
         "additionalProperties": false,
         "properties": {
           "field": { "type": "string", "examples": ["startAt"] },
-          "message": { "type": "string", "examples": ["Booking start time must be before end time"] }
+          "message": {
+            "type": "string",
+            "examples": ["Booking start time must be before end time"]
+          }
         }
       },
       "default": []

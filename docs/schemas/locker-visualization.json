@@ -17,7 +17,10 @@
           "id": { "type": "string", "format": "uuid" },
           "code": { "type": "string" },
           "label": { "type": ["string", "null"] },
-          "lockerStatus": { "type": "string", "enum": ["AVAILABLE", "MAINTENANCE", "DISABLED"] },
+          "lockerStatus": {
+            "type": "string",
+            "enum": ["AVAILABLE", "MAINTENANCE", "DISABLED"]
+          },
           "visualizationStatus": {
             "type": "string",
             "enum": ["AVAILABLE", "OCCUPIED", "MY_BOOKING"],

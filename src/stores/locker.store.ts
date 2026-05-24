@@ -1,6 +1,13 @@
-import { create } from 'zustand';
-import { dummyLockerVisualizationResponse, dummyLockers } from '@/dummy/locker.dummy';
-import type { Locker, LockerFormValues, LockerVisualization } from '@/types/locker';
+import { create } from "zustand";
+import {
+  dummyLockerVisualizationResponse,
+  dummyLockers,
+} from "@/dummy/locker.dummy";
+import type {
+  Locker,
+  LockerFormValues,
+  LockerVisualization,
+} from "@/types/locker";
 
 type LockerState = {
   lockers: Locker[];
@@ -36,14 +43,19 @@ export const useLockerStore = create<LockerState>((set, get) => ({
     set((state) => ({
       lockers: [...state.lockers, ...lockers.map(createLocker)],
     })),
-  getByLocationId: (locationId) => get().lockers.filter((locker) => locker.locationId === locationId),
+  getByLocationId: (locationId) =>
+    get().lockers.filter((locker) => locker.locationId === locationId),
   markMyBooking: (lockerId, bookingId) =>
     set((state) => ({
       visualization: {
         ...state.visualization,
         lockers: state.visualization.lockers.map((locker) =>
           locker.id === lockerId
-            ? { ...locker, visualizationStatus: 'MY_BOOKING', activeBookingId: bookingId }
+            ? {
+                ...locker,
+                visualizationStatus: "MY_BOOKING",
+                activeBookingId: bookingId,
+              }
             : locker,
         ),
       },

@@ -1,4 +1,4 @@
-import type { BookingStatus, DateTimeUtc, PublicId } from './common';
+import type { BookingStatus, DateTimeUtc, PublicId } from "./common";
 
 export type Booking = {
   id: PublicId;
@@ -25,4 +25,3 @@ export type CreateBookingRequest = {
   startAt: DateTimeUtc;
   endAt: DateTimeUtc;
 };
-

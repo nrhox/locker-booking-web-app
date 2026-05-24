@@ -43,7 +43,10 @@
         "example": {
           "message": "Booking conflict",
           "errors": [
-            { "field": "lockerId", "message": "Locker is already booked for the requested time range" }
+            {
+              "field": "lockerId",
+              "message": "Locker is already booked for the requested time range"
+            }
           ]
         }
       }
@@ -57,7 +60,10 @@
         "example": {
           "message": "Locker can only be opened once every 3 minutes",
           "errors": [
-            { "field": "lockerId", "message": "Open command is rate limited for this active booking" }
+            {
+              "field": "lockerId",
+              "message": "Open command is rate limited for this active booking"
+            }
           ]
         }
       }

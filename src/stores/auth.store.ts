@@ -1,7 +1,7 @@
-import { create } from 'zustand';
-import { dummyAdmin, dummyAuthResponse, dummyUser } from '@/dummy/auth.dummy';
-import type { User } from '@/types/auth';
-import type { UserRole } from '@/types/common';
+import { create } from "zustand";
+import { dummyAdmin, dummyAuthResponse, dummyUser } from "@/dummy/auth.dummy";
+import type { User } from "@/types/auth";
+import type { UserRole } from "@/types/common";
 
 type AuthState = {
   user: User | null;
@@ -19,7 +19,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   refreshToken: dummyAuthResponse.data.tokens.refreshToken,
   isAuthenticated: true,
   loginAs: (role) => {
-    const user = role === 'ADMIN' ? dummyAdmin : dummyUser;
+    const user = role === "ADMIN" ? dummyAdmin : dummyUser;
     set({
       user,
       accessToken: dummyAuthResponse.data.tokens.accessToken,
@@ -27,6 +27,18 @@ export const useAuthStore = create<AuthState>((set) => ({
       isAuthenticated: true,
     });
   },
-  logout: () => set({ user: null, accessToken: null, refreshToken: null, isAuthenticated: false }),
-  deleteAccount: () => set({ user: null, accessToken: null, refreshToken: null, isAuthenticated: false }),
+  logout: () =>
+    set({
+      user: null,
+      accessToken: null,
+      refreshToken: null,
+      isAuthenticated: false,
+    }),
+  deleteAccount: () =>
+    set({
+      user: null,
+      accessToken: null,
+      refreshToken: null,
+      isAuthenticated: false,
+    }),
 }));

@@ -1,11 +1,15 @@
-import { create } from 'zustand';
-import { dummyBookings } from '@/dummy/booking.dummy';
-import type { Booking, CreateBookingRequest } from '@/types/booking';
+import { create } from "zustand";
+import { dummyBookings } from "@/dummy/booking.dummy";
+import type { Booking, CreateBookingRequest } from "@/types/booking";
 
 type BookingState = {
   bookings: Booking[];
   openBookingIds: Record<string, boolean>;
-  createBooking: (request: CreateBookingRequest, userId: string, locationId: string) => Booking;
+  createBooking: (
+    request: CreateBookingRequest,
+    userId: string,
+    locationId: string,
+  ) => Booking;
   cancelBooking: (id: string) => void;
   toggleLockerAccess: (bookingId: string) => void;
   isLockerOpen: (bookingId: string) => boolean;
@@ -21,7 +25,7 @@ export const useBookingStore = create<BookingState>((set, get) => ({
       userId,
       lockerId: request.lockerId,
       locationId,
-      status: 'ACTIVE',
+      status: "ACTIVE",
       startAt: request.startAt,
       endAt: request.endAt,
       cancelledAt: null,
@@ -36,7 +40,12 @@ export const useBookingStore = create<BookingState>((set, get) => ({
     set((state) => ({
       bookings: state.bookings.map((booking) =>
         booking.id === id
-          ? { ...booking, status: 'CANCELLED', cancelledAt: new Date().toISOString(), updatedAt: new Date().toISOString() }
+          ? {
+              ...booking,
+              status: "CANCELLED",
+              cancelledAt: new Date().toISOString(),
+              updatedAt: new Date().toISOString(),
+            }
           : booking,
       ),
       openBookingIds: { ...state.openBookingIds, [id]: false },

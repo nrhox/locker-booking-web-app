@@ -1,6 +1,6 @@
-import type { DateTimeUtc, PublicId } from './common';
+import type { DateTimeUtc, PublicId } from "./common";
 
-export type LocationStatus = 'ACTIVE' | 'INACTIVE';
+export type LocationStatus = "ACTIVE" | "INACTIVE";
 
 export type Location = {
   id: PublicId;

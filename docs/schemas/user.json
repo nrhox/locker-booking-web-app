@@ -2,7 +2,15 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://api.example.com/schemas/user.json",
   "type": "object",
-  "required": ["id", "role", "displayName", "email", "oauthProviders", "createdAt", "updatedAt"],
+  "required": [
+    "id",
+    "role",
+    "displayName",
+    "email",
+    "oauthProviders",
+    "createdAt",
+    "updatedAt"
+  ],
   "additionalProperties": false,
   "properties": {
     "id": { "type": "string", "format": "uuid" },
@@ -17,7 +25,10 @@
         "required": ["provider", "providerUserId"],
         "additionalProperties": false,
         "properties": {
-          "provider": { "type": "string", "enum": ["google", "github", "microsoft", "apple"] },
+          "provider": {
+            "type": "string",
+            "enum": ["google", "github", "microsoft", "apple"]
+          },
           "providerUserId": { "type": "string" }
         }
       }

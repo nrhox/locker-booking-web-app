@@ -39,8 +39,18 @@
       "security": [],
       "parameters": [
         { "$ref": "../components/parameters.json#/oauthProvider" },
-        { "name": "code", "in": "query", "required": true, "schema": { "type": "string" } },
-        { "name": "state", "in": "query", "required": true, "schema": { "type": "string" } }
+        {
+          "name": "code",
+          "in": "query",
+          "required": true,
+          "schema": { "type": "string" }
+        },
+        {
+          "name": "state",
+          "in": "query",
+          "required": true,
+          "schema": { "type": "string" }
+        }
       ],
       "responses": {
         "200": {
@@ -52,7 +62,10 @@
                 "required": ["message", "data"],
                 "additionalProperties": false,
                 "properties": {
-                  "message": { "type": "string", "examples": ["Login successful"] },
+                  "message": {
+                    "type": "string",
+                    "examples": ["Login successful"]
+                  },
                   "data": { "$ref": "../schemas/auth-session.json" }
                 }
               }

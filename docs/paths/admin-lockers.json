@@ -7,7 +7,11 @@
       "description": "Admin role required. Locker status is a permanent operational state only: AVAILABLE, MAINTENANCE, or DISABLED.",
       "requestBody": {
         "required": true,
-        "content": { "application/json": { "schema": { "$ref": "../schemas/create-locker-request.json" } } }
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "../schemas/create-locker-request.json" }
+          }
+        }
       },
       "responses": {
         "201": {
@@ -19,7 +23,10 @@
                 "required": ["message", "data"],
                 "additionalProperties": false,
                 "properties": {
-                  "message": { "type": "string", "examples": ["Locker created successfully"] },
+                  "message": {
+                    "type": "string",
+                    "examples": ["Locker created successfully"]
+                  },
                   "data": { "$ref": "../schemas/locker.json" }
                 }
               }
@@ -42,7 +49,11 @@
       "parameters": [{ "$ref": "../components/parameters.json#/publicId" }],
       "requestBody": {
         "required": true,
-        "content": { "application/json": { "schema": { "$ref": "../schemas/update-locker-request.json" } } }
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "../schemas/update-locker-request.json" }
+          }
+        }
       },
       "responses": {
         "200": {
@@ -54,7 +65,10 @@
                 "required": ["message", "data"],
                 "additionalProperties": false,
                 "properties": {
-                  "message": { "type": "string", "examples": ["Locker updated successfully"] },
+                  "message": {
+                    "type": "string",
+                    "examples": ["Locker updated successfully"]
+                  },
                   "data": { "$ref": "../schemas/locker.json" }
                 }
               }
@@ -84,7 +98,10 @@
                 "required": ["message", "data"],
                 "additionalProperties": false,
                 "properties": {
-                  "message": { "type": "string", "examples": ["Locker deleted successfully"] },
+                  "message": {
+                    "type": "string",
+                    "examples": ["Locker deleted successfully"]
+                  },
                   "data": {
                     "type": "object",
                     "required": ["deleted"],

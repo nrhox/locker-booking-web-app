@@ -7,7 +7,11 @@
       "description": "Admin role required.",
       "requestBody": {
         "required": true,
-        "content": { "application/json": { "schema": { "$ref": "../schemas/create-location-request.json" } } }
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "../schemas/create-location-request.json" }
+          }
+        }
       },
       "responses": {
         "201": {
@@ -19,7 +23,10 @@
                 "required": ["message", "data"],
                 "additionalProperties": false,
                 "properties": {
-                  "message": { "type": "string", "examples": ["Location created successfully"] },
+                  "message": {
+                    "type": "string",
+                    "examples": ["Location created successfully"]
+                  },
                   "data": { "$ref": "../schemas/location.json" }
                 }
               }
@@ -42,7 +49,11 @@
       "parameters": [{ "$ref": "../components/parameters.json#/publicId" }],
       "requestBody": {
         "required": true,
-        "content": { "application/json": { "schema": { "$ref": "../schemas/update-location-request.json" } } }
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "../schemas/update-location-request.json" }
+          }
+        }
       },
       "responses": {
         "200": {
@@ -54,7 +65,10 @@
                 "required": ["message", "data"],
                 "additionalProperties": false,
                 "properties": {
-                  "message": { "type": "string", "examples": ["Location updated successfully"] },
+                  "message": {
+                    "type": "string",
+                    "examples": ["Location updated successfully"]
+                  },
                   "data": { "$ref": "../schemas/location.json" }
                 }
               }
@@ -84,7 +98,10 @@
                 "required": ["message", "data"],
                 "additionalProperties": false,
                 "properties": {
-                  "message": { "type": "string", "examples": ["Location deleted successfully"] },
+                  "message": {
+                    "type": "string",
+                    "examples": ["Location deleted successfully"]
+                  },
                   "data": {
                     "type": "object",
                     "required": ["deleted"],

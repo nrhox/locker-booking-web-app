@@ -8,7 +8,9 @@
     },
     "error": {
       "message": "Validation error",
-      "errors": [{ "field": "fieldName", "message": "Human readable validation message" }]
+      "errors": [
+        { "field": "fieldName", "message": "Human readable validation message" }
+      ]
     }
   },
   "httpSemantics": [

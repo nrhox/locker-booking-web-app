@@ -1,4 +1,9 @@
-import type { DateTimeUtc, LockerStatus, LockerVisualizationStatus, PublicId } from './common';
+import type {
+  DateTimeUtc,
+  LockerStatus,
+  LockerVisualizationStatus,
+  PublicId,
+} from "./common";
 
 export type LockerPosition = {
   row?: number;
@@ -38,4 +43,3 @@ export type LockerFormValues = {
   label: string;
   status: LockerStatus;
 };
-

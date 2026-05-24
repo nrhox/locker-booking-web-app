@@ -8,7 +8,10 @@
     "locationId": { "type": "string", "format": "uuid" },
     "code": { "type": "string", "pattern": "^[A-Z0-9_-]{1,32}$" },
     "label": { "type": ["string", "null"], "maxLength": 120 },
-    "status": { "type": "string", "enum": ["AVAILABLE", "MAINTENANCE", "DISABLED"] },
+    "status": {
+      "type": "string",
+      "enum": ["AVAILABLE", "MAINTENANCE", "DISABLED"]
+    },
     "position": {
       "type": ["object", "null"],
       "additionalProperties": false,

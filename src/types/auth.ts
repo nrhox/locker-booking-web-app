@@ -1,4 +1,4 @@
-import type { DateTimeUtc, OAuthProvider, PublicId, UserRole } from './common';
+import type { DateTimeUtc, OAuthProvider, PublicId, UserRole } from "./common";
 
 export type OAuthIdentity = {
   provider: OAuthProvider;
@@ -19,7 +19,7 @@ export type User = {
 export type TokenPair = {
   accessToken: string;
   refreshToken: string;
-  tokenType: 'Bearer';
+  tokenType: "Bearer";
   expiresIn: number;
 };
 
@@ -31,4 +31,3 @@ export type AuthSession = {
 export type LoginFormValues = {
   provider: OAuthProvider;
 };
-

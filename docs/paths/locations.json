@@ -21,7 +21,10 @@
                 "additionalProperties": false,
                 "properties": {
                   "message": { "type": "string", "examples": ["Success"] },
-                  "data": { "type": "array", "items": { "$ref": "../schemas/location.json" } },
+                  "data": {
+                    "type": "array",
+                    "items": { "$ref": "../schemas/location.json" }
+                  },
                   "meta": { "$ref": "../schemas/success-meta.json" }
                 }
               }
@@ -82,7 +85,9 @@
                 }
               },
               "examples": {
-                "success": { "$ref": "../examples/locker-visualization-success.json" }
+                "success": {
+                  "$ref": "../examples/locker-visualization-success.json"
+                }
               }
             }
           }

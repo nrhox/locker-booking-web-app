@@ -1,4 +1,4 @@
-import type { PaginationMeta } from './common';
+import type { PaginationMeta } from "./common";
 
 export type ApiResponse<T> = {
   message: string;
@@ -27,4 +27,3 @@ export type ListParams<TStatus extends string = string> = {
   sort?: string;
   status?: TStatus;
 };
-

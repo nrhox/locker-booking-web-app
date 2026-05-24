@@ -16,7 +16,10 @@
                 "required": ["message", "data"],
                 "additionalProperties": false,
                 "properties": {
-                  "message": { "type": "string", "examples": ["Locker opened successfully"] },
+                  "message": {
+                    "type": "string",
+                    "examples": ["Locker opened successfully"]
+                  },
                   "data": { "$ref": "../schemas/access-log.json" }
                 }
               }
@@ -47,7 +50,10 @@
                 "required": ["message", "data"],
                 "additionalProperties": false,
                 "properties": {
-                  "message": { "type": "string", "examples": ["Locker closed successfully"] },
+                  "message": {
+                    "type": "string",
+                    "examples": ["Locker closed successfully"]
+                  },
                   "data": { "$ref": "../schemas/access-log.json" }
                 }
               }

@@ -9,59 +9,222 @@
     {
       "name": "users",
       "purpose": "OAuth identity, role, profile, and provider links.",
-      "fields": ["id", "role", "displayName", "email", "avatarUrl", "oauthProviders", "createdAt", "updatedAt"]
+      "fields": [
+        "id",
+        "role",
+        "displayName",
+        "email",
+        "avatarUrl",
+        "oauthProviders",
+        "createdAt",
+        "updatedAt"
+      ]
     },
     {
       "name": "refreshTokens",
       "purpose": "Refresh sessions, token rotation, revocation, and device/session metadata.",
-      "fields": ["id", "userId", "tokenHash", "familyId", "expiresAt", "revokedAt", "createdAt", "lastUsedAt"]
+      "fields": [
+        "id",
+        "userId",
+        "tokenHash",
+        "familyId",
+        "expiresAt",
+        "revokedAt",
+        "createdAt",
+        "lastUsedAt"
+      ]
     },
     {
       "name": "locations",
       "purpose": "Locker location metadata.",
-      "fields": ["id", "name", "code", "description", "address", "status", "timezone", "createdAt", "updatedAt", "deletedAt"]
+      "fields": [
+        "id",
+        "name",
+        "code",
+        "description",
+        "address",
+        "status",
+        "timezone",
+        "createdAt",
+        "updatedAt",
+        "deletedAt"
+      ]
     },
     {
       "name": "lockers",
       "purpose": "Permanent locker inventory and operational status.",
-      "fields": ["id", "locationId", "code", "label", "status", "position", "createdAt", "updatedAt", "deletedAt"]
+      "fields": [
+        "id",
+        "locationId",
+        "code",
+        "label",
+        "status",
+        "position",
+        "createdAt",
+        "updatedAt",
+        "deletedAt"
+      ]
     },
     {
       "name": "bookings",
       "purpose": "Booking lifecycle. Occupancy is derived from ACTIVE bookings and current UTC time.",
-      "fields": ["id", "userId", "lockerId", "locationId", "status", "startAt", "endAt", "cancelledAt", "completedAt", "createdAt", "updatedAt"]
+      "fields": [
+        "id",
+        "userId",
+        "lockerId",
+        "locationId",
+        "status",
+        "startAt",
+        "endAt",
+        "cancelledAt",
+        "completedAt",
+        "createdAt",
+        "updatedAt"
+      ]
     },
     {
       "name": "lockerAccessLogs",
       "purpose": "Append-only open/close audit stream and 3 minute open throttle lookup.",
-      "fields": ["id", "userId", "lockerId", "bookingId", "action", "requestedAt", "allowed", "deniedReason"]
+      "fields": [
+        "id",
+        "userId",
+        "lockerId",
+        "bookingId",
+        "action",
+        "requestedAt",
+        "allowed",
+        "deniedReason"
+      ]
     },
     {
       "name": "oauthStates",
       "purpose": "Temporary OAuth state/PKCE verification records.",
-      "fields": ["id", "provider", "stateHash", "codeVerifierHash", "redirectUri", "expiresAt", "createdAt"]
+      "fields": [
+        "id",
+        "provider",
+        "stateHash",
+        "codeVerifierHash",
+        "redirectUri",
+        "expiresAt",
+        "createdAt"
+      ]
     }
   ],
   "indexes": [
-    { "collection": "users", "index": { "id": 1 }, "options": { "unique": true } },
-    { "collection": "users", "index": { "email": 1 }, "options": { "unique": true } },
-    { "collection": "users", "index": { "oauthProviders.provider": 1, "oauthProviders.providerUserId": 1 }, "options": { "unique": true } },
-    { "collection": "refreshTokens", "index": { "id": 1 }, "options": { "unique": true } },
-    { "collection": "refreshTokens", "index": { "tokenHash": 1 }, "options": { "unique": true } },
-    { "collection": "refreshTokens", "index": { "expiresAt": 1 }, "options": { "expireAfterSeconds": 0 } },
-    { "collection": "locations", "index": { "id": 1 }, "options": { "unique": true } },
-    { "collection": "locations", "index": { "code": 1 }, "options": { "unique": true, "partialFilterExpression": { "deletedAt": null } } },
-    { "collection": "lockers", "index": { "id": 1 }, "options": { "unique": true } },
-    { "collection": "lockers", "index": { "locationId": 1, "code": 1 }, "options": { "unique": true, "partialFilterExpression": { "deletedAt": null } } },
-    { "collection": "lockers", "index": { "locationId": 1, "status": 1, "position.row": 1, "position.column": 1 }, "options": {} },
-    { "collection": "bookings", "index": { "id": 1 }, "options": { "unique": true } },
-    { "collection": "bookings", "index": { "lockerId": 1, "status": 1, "startAt": 1, "endAt": 1 }, "options": {} },
-    { "collection": "bookings", "index": { "userId": 1, "status": 1, "startAt": -1 }, "options": {} },
-    { "collection": "bookings", "index": { "locationId": 1, "status": 1, "startAt": 1, "endAt": 1 }, "options": {} },
-    { "collection": "lockerAccessLogs", "index": { "id": 1 }, "options": { "unique": true } },
-    { "collection": "lockerAccessLogs", "index": { "bookingId": 1, "lockerId": 1, "action": 1, "requestedAt": -1 }, "options": {} },
-    { "collection": "lockerAccessLogs", "index": { "requestedAt": 1 }, "options": { "expireAfterSeconds": 31536000 } },
-    { "collection": "oauthStates", "index": { "expiresAt": 1 }, "options": { "expireAfterSeconds": 0 } }
+    {
+      "collection": "users",
+      "index": { "id": 1 },
+      "options": { "unique": true }
+    },
+    {
+      "collection": "users",
+      "index": { "email": 1 },
+      "options": { "unique": true }
+    },
+    {
+      "collection": "users",
+      "index": {
+        "oauthProviders.provider": 1,
+        "oauthProviders.providerUserId": 1
+      },
+      "options": { "unique": true }
+    },
+    {
+      "collection": "refreshTokens",
+      "index": { "id": 1 },
+      "options": { "unique": true }
+    },
+    {
+      "collection": "refreshTokens",
+      "index": { "tokenHash": 1 },
+      "options": { "unique": true }
+    },
+    {
+      "collection": "refreshTokens",
+      "index": { "expiresAt": 1 },
+      "options": { "expireAfterSeconds": 0 }
+    },
+    {
+      "collection": "locations",
+      "index": { "id": 1 },
+      "options": { "unique": true }
+    },
+    {
+      "collection": "locations",
+      "index": { "code": 1 },
+      "options": {
+        "unique": true,
+        "partialFilterExpression": { "deletedAt": null }
+      }
+    },
+    {
+      "collection": "lockers",
+      "index": { "id": 1 },
+      "options": { "unique": true }
+    },
+    {
+      "collection": "lockers",
+      "index": { "locationId": 1, "code": 1 },
+      "options": {
+        "unique": true,
+        "partialFilterExpression": { "deletedAt": null }
+      }
+    },
+    {
+      "collection": "lockers",
+      "index": {
+        "locationId": 1,
+        "status": 1,
+        "position.row": 1,
+        "position.column": 1
+      },
+      "options": {}
+    },
+    {
+      "collection": "bookings",
+      "index": { "id": 1 },
+      "options": { "unique": true }
+    },
+    {
+      "collection": "bookings",
+      "index": { "lockerId": 1, "status": 1, "startAt": 1, "endAt": 1 },
+      "options": {}
+    },
+    {
+      "collection": "bookings",
+      "index": { "userId": 1, "status": 1, "startAt": -1 },
+      "options": {}
+    },
+    {
+      "collection": "bookings",
+      "index": { "locationId": 1, "status": 1, "startAt": 1, "endAt": 1 },
+      "options": {}
+    },
+    {
+      "collection": "lockerAccessLogs",
+      "index": { "id": 1 },
+      "options": { "unique": true }
+    },
+    {
+      "collection": "lockerAccessLogs",
+      "index": {
+        "bookingId": 1,
+        "lockerId": 1,
+        "action": 1,
+        "requestedAt": -1
+      },
+      "options": {}
+    },
+    {
+      "collection": "lockerAccessLogs",
+      "index": { "requestedAt": 1 },
+      "options": { "expireAfterSeconds": 31536000 }
+    },
+    {
+      "collection": "oauthStates",
+      "index": { "expiresAt": 1 },
+      "options": { "expireAfterSeconds": 0 }
+    }
   ],
   "bookingOverlapOptimization": {
     "query": {

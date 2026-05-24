@@ -1,14 +1,14 @@
-import { Loader2 } from 'lucide-react';
-import type { ButtonHTMLAttributes, ReactNode } from 'react';
-import { cn } from '@/utils/cn';
+import { Loader2 } from "lucide-react";
+import type { ButtonHTMLAttributes, ReactNode } from "react";
+import { cn } from "@/utils/cn";
 
-type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
+type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
 
 const variants: Record<ButtonVariant, string> = {
-  primary: 'border-teal-700 bg-teal-700 text-white hover:bg-teal-800',
-  secondary: 'border-slate-200 bg-white text-slate-800 hover:bg-slate-50',
-  ghost: 'border-transparent bg-transparent text-slate-700 hover:bg-slate-100',
-  danger: 'border-rose-600 bg-rose-600 text-white hover:bg-rose-700',
+  primary: "border-teal-700 bg-teal-700 text-white hover:bg-teal-800",
+  secondary: "border-slate-200 bg-white text-slate-800 hover:bg-slate-50",
+  ghost: "border-transparent bg-transparent text-slate-700 hover:bg-slate-100",
+  danger: "border-rose-600 bg-rose-600 text-white hover:bg-rose-700",
 };
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -17,11 +17,19 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   icon?: ReactNode;
 };
 
-export function Button({ className, variant = 'primary', isLoading, icon, children, disabled, ...props }: ButtonProps) {
+export function Button({
+  className,
+  variant = "primary",
+  isLoading,
+  icon,
+  children,
+  disabled,
+  ...props
+}: ButtonProps) {
   return (
     <button
       className={cn(
-        'inline-flex h-10 items-center justify-center gap-2 rounded-md border px-4 text-sm font-medium transition disabled:opacity-60',
+        "inline-flex h-10 items-center justify-center gap-2 rounded-md border px-4 text-sm font-medium transition disabled:opacity-60",
         variants[variant],
         className,
       )}
@@ -33,4 +41,3 @@ export function Button({ className, variant = 'primary', isLoading, icon, childr
     </button>
   );
 }
-

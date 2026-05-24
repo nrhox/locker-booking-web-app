@@ -2,7 +2,15 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://api.example.com/schemas/access-log.json",
   "type": "object",
-  "required": ["id", "userId", "lockerId", "bookingId", "action", "requestedAt", "allowed"],
+  "required": [
+    "id",
+    "userId",
+    "lockerId",
+    "bookingId",
+    "action",
+    "requestedAt",
+    "allowed"
+  ],
   "additionalProperties": false,
   "properties": {
     "id": { "type": "string", "format": "uuid" },
@@ -12,6 +20,9 @@
     "action": { "type": "string", "enum": ["OPEN", "CLOSE"] },
     "requestedAt": { "type": "string", "format": "date-time" },
     "allowed": { "type": "boolean" },
-    "deniedReason": { "type": ["string", "null"], "examples": ["OPEN_RATE_LIMIT_3_MINUTES"] }
+    "deniedReason": {
+      "type": ["string", "null"],
+      "examples": ["OPEN_RATE_LIMIT_3_MINUTES"]
+    }
   }
 }

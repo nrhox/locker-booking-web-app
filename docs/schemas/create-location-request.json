@@ -9,7 +9,11 @@
     "code": { "type": "string", "pattern": "^[A-Z0-9_-]{2,32}$" },
     "description": { "type": ["string", "null"], "maxLength": 1000 },
     "address": { "type": ["string", "null"], "maxLength": 500 },
-    "status": { "type": "string", "enum": ["ACTIVE", "INACTIVE"], "default": "ACTIVE" },
+    "status": {
+      "type": "string",
+      "enum": ["ACTIVE", "INACTIVE"],
+      "default": "ACTIVE"
+    },
     "timezone": { "type": "string", "examples": ["Asia/Jakarta"] }
   }
 }

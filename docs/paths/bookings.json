@@ -7,7 +7,11 @@
       "description": "Creates a booking for the authenticated user. Booking is rejected when the locker is DISABLED or MAINTENANCE, when requested time is outside valid range, or when an overlapping blocking booking exists. Safe overlap validation: existing.startAt < requested.endAt && existing.endAt > requested.startAt for blocking statuses ACTIVE.",
       "requestBody": {
         "required": true,
-        "content": { "application/json": { "schema": { "$ref": "../schemas/create-booking-request.json" } } }
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "../schemas/create-booking-request.json" }
+          }
+        }
       },
       "responses": {
         "201": {
@@ -19,11 +23,16 @@
                 "required": ["message", "data"],
                 "additionalProperties": false,
                 "properties": {
-                  "message": { "type": "string", "examples": ["Booking created successfully"] },
+                  "message": {
+                    "type": "string",
+                    "examples": ["Booking created successfully"]
+                  },
                   "data": { "$ref": "../schemas/booking.json" }
                 }
               },
-              "examples": { "success": { "$ref": "../examples/booking-create-success.json" } }
+              "examples": {
+                "success": { "$ref": "../examples/booking-create-success.json" }
+              }
             }
           }
         },
@@ -51,7 +60,10 @@
                 "additionalProperties": false,
                 "properties": {
                   "message": { "type": "string", "examples": ["Success"] },
-                  "data": { "type": "array", "items": { "$ref": "../schemas/booking.json" } }
+                  "data": {
+                    "type": "array",
+                    "items": { "$ref": "../schemas/booking.json" }
+                  }
                 }
               }
             }
@@ -85,7 +97,10 @@
                 "additionalProperties": false,
                 "properties": {
                   "message": { "type": "string", "examples": ["Success"] },
-                  "data": { "type": "array", "items": { "$ref": "../schemas/booking.json" } },
+                  "data": {
+                    "type": "array",
+                    "items": { "$ref": "../schemas/booking.json" }
+                  },
                   "meta": { "$ref": "../schemas/success-meta.json" }
                 }
               }
@@ -139,7 +154,10 @@
                 "required": ["message", "data"],
                 "additionalProperties": false,
                 "properties": {
-                  "message": { "type": "string", "examples": ["Booking cancelled successfully"] },
+                  "message": {
+                    "type": "string",
+                    "examples": ["Booking cancelled successfully"]
+                  },
                   "data": { "$ref": "../schemas/booking.json" }
                 }
               }
