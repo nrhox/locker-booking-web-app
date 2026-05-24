@@ -5,11 +5,21 @@ import type { ButtonHTMLAttributes, ReactNode } from "react";
 type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
 
 const variants: Record<ButtonVariant, string> = {
-  primary: "border-teal-700 bg-teal-700 text-white hover:bg-teal-800",
+  primary: "border-teal-700 bg-teal-700 text-white! hover:bg-teal-800",
   secondary: "border-slate-200 bg-white text-slate-800 hover:bg-slate-50",
   ghost: "border-transparent bg-transparent text-slate-700 hover:bg-slate-100",
   danger: "border-rose-600 bg-rose-600 text-white hover:bg-rose-700",
 };
+
+const baseClass =
+  "inline-flex h-10 w-fit items-center justify-center gap-2 rounded-md border px-4 text-sm font-medium transition disabled:opacity-60";
+
+export function ButtonTheme(
+  variant?: ButtonVariant,
+  className?: string,
+): string {
+  return [baseClass, variants[variant ?? "primary"], className].join(" ");
+}
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: ButtonVariant;
@@ -28,11 +38,7 @@ export function Button({
 }: ButtonProps) {
   return (
     <button
-      className={cn(
-        "inline-flex h-10 w-fit items-center justify-center gap-2 rounded-md border px-4 text-sm font-medium transition disabled:opacity-60",
-        variants[variant],
-        className,
-      )}
+      className={cn(baseClass, variants[variant], className)}
       disabled={disabled || isLoading}
       {...props}
     >
