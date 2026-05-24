@@ -1,0 +1,30 @@
+{
+  "authentication": [
+    "Support OAuth 2.0 authorization code flow only; do not add email/password or username/password login.",
+    "Use provider abstraction with provider keys google, github, microsoft, and apple.",
+    "Issue short-lived JWT access tokens and rotate refresh tokens on each refresh.",
+    "Store refresh tokens as hashes, not plaintext."
+  ],
+  "authorization": [
+    "Use role-based access control with USER and ADMIN only.",
+    "Apply ADMIN checks to every /api/v1/admin/* endpoint.",
+    "Enforce ownership on user booking and locker access endpoints."
+  ],
+  "jwt": [
+    "Include sub as user public id, role, iat, exp, iss, aud, and jti.",
+    "Keep access token lifetime short, for example 10 to 15 minutes.",
+    "Use asymmetric signing for production when multiple services verify tokens."
+  ],
+  "oauth": [
+    "Use state and PKCE for browser OAuth flow.",
+    "Allowlist frontend redirect URIs.",
+    "Validate issuer, audience/client id, nonce when applicable, and verified email from provider profile."
+  ],
+  "apiHardening": [
+    "Require HTTPS in production.",
+    "Use CORS allowlist for the React SPA origin.",
+    "Apply rate limits to OAuth start/callback, refresh, and locker access endpoints.",
+    "Return consistent error shapes with an optional errors array.",
+    "Do not leak internal ObjectId, provider raw tokens, stack traces, or hardware secrets."
+  ]
+}

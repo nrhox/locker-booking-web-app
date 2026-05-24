@@ -1,0 +1,95 @@
+{
+  "locations": {
+    "get": {
+      "tags": ["Locations"],
+      "operationId": "listLocations",
+      "summary": "List locations",
+      "parameters": [
+        { "$ref": "../components/parameters.json#/page" },
+        { "$ref": "../components/parameters.json#/limit" },
+        { "$ref": "../components/parameters.json#/sort" },
+        { "$ref": "../components/parameters.json#/locationStatus" }
+      ],
+      "responses": {
+        "200": {
+          "description": "Paginated locations returned.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["message", "data", "meta"],
+                "additionalProperties": false,
+                "properties": {
+                  "message": { "type": "string", "examples": ["Success"] },
+                  "data": { "type": "array", "items": { "$ref": "../schemas/location.json" } },
+                  "meta": { "$ref": "../schemas/success-meta.json" }
+                }
+              }
+            }
+          }
+        },
+        "401": { "$ref": "../components/responses.json#/Unauthorized" }
+      }
+    }
+  },
+  "locationById": {
+    "get": {
+      "tags": ["Locations"],
+      "operationId": "getLocation",
+      "summary": "Get location detail",
+      "parameters": [{ "$ref": "../components/parameters.json#/publicId" }],
+      "responses": {
+        "200": {
+          "description": "Location returned.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["message", "data"],
+                "additionalProperties": false,
+                "properties": {
+                  "message": { "type": "string", "examples": ["Success"] },
+                  "data": { "$ref": "../schemas/location.json" }
+                }
+              }
+            }
+          }
+        },
+        "401": { "$ref": "../components/responses.json#/Unauthorized" },
+        "404": { "$ref": "../components/responses.json#/NotFound" }
+      }
+    }
+  },
+  "lockerVisualization": {
+    "get": {
+      "tags": ["Locations"],
+      "operationId": "getLocationLockerVisualization",
+      "summary": "Get locker visualization for a location",
+      "description": "Returns frontend-ready locker visualization. visualizationStatus is derived from active bookings, current user ownership, and permanent locker status; it must not be persisted in MongoDB.",
+      "parameters": [{ "$ref": "../components/parameters.json#/publicId" }],
+      "responses": {
+        "200": {
+          "description": "Locker visualization returned.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["message", "data"],
+                "additionalProperties": false,
+                "properties": {
+                  "message": { "type": "string", "examples": ["Success"] },
+                  "data": { "$ref": "../schemas/locker-visualization.json" }
+                }
+              },
+              "examples": {
+                "success": { "$ref": "../examples/locker-visualization-success.json" }
+              }
+            }
+          }
+        },
+        "401": { "$ref": "../components/responses.json#/Unauthorized" },
+        "404": { "$ref": "../components/responses.json#/NotFound" }
+      }
+    }
+  }
+}

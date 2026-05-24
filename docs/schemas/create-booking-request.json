@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.example.com/schemas/create-booking-request.json",
+  "type": "object",
+  "required": ["lockerId", "startAt", "endAt"],
+  "additionalProperties": false,
+  "properties": {
+    "lockerId": { "type": "string", "format": "uuid" },
+    "startAt": { "type": "string", "format": "date-time", "description": "ISO 8601 UTC booking start datetime." },
+    "endAt": { "type": "string", "format": "date-time", "description": "ISO 8601 UTC booking end datetime. Must be later than startAt." }
+  }
+}

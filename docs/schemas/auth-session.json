@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.example.com/schemas/auth-session.json",
+  "type": "object",
+  "required": ["user", "tokens"],
+  "additionalProperties": false,
+  "properties": {
+    "user": { "$ref": "./user.json" },
+    "tokens": { "$ref": "./token-pair.json" }
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "BadRequest": {
+    "description": "Malformed request.",
+    "content": {
+      "application/json": {
+        "schema": { "$ref": "../schemas/error-response.json" },
+        "example": { "message": "Bad request", "errors": [] }
+      }
+    }
+  },
+  "Unauthorized": {
+    "description": "Missing, expired, or invalid credentials.",
+    "content": {
+      "application/json": {
+        "schema": { "$ref": "../schemas/error-response.json" },
+        "example": { "message": "Unauthorized", "errors": [] }
+      }
+    }
+  },
+  "Forbidden": {
+    "description": "Authenticated user does not have permission.",
+    "content": {
+      "application/json": {
+        "schema": { "$ref": "../schemas/error-response.json" },
+        "example": { "message": "Forbidden", "errors": [] }
+      }
+    }
+  },
+  "NotFound": {
+    "description": "Resource not found.",
+    "content": {
+      "application/json": {
+        "schema": { "$ref": "../schemas/error-response.json" },
+        "example": { "message": "Resource not found", "errors": [] }
+      }
+    }
+  },
+  "Conflict": {
+    "description": "Request conflicts with current resource state.",
+    "content": {
+      "application/json": {
+        "schema": { "$ref": "../schemas/error-response.json" },
+        "example": {
+          "message": "Booking conflict",
+          "errors": [
+            { "field": "lockerId", "message": "Locker is already booked for the requested time range" }
+          ]
+        }
+      }
+    }
+  },
+  "RateLimited": {
+    "description": "Too many requests or locker open command violates the 3 minute rule.",
+    "content": {
+      "application/json": {
+        "schema": { "$ref": "../schemas/error-response.json" },
+        "example": {
+          "message": "Locker can only be opened once every 3 minutes",
+          "errors": [
+            { "field": "lockerId", "message": "Open command is rate limited for this active booking" }
+          ]
+        }
+      }
+    }
+  },
+  "UnprocessableEntity": {
+    "description": "Validation failed.",
+    "content": {
+      "application/json": {
+        "schema": { "$ref": "../schemas/error-response.json" },
+        "example": {
+          "message": "Validation error",
+          "errors": [
+            { "field": "startAt", "message": "startAt must be before endAt" }
+          ]
+        }
+      }
+    }
+  },
+  "InternalServerError": {
+    "description": "Unexpected server error.",
+    "content": {
+      "application/json": {
+        "schema": { "$ref": "../schemas/error-response.json" },
+        "example": { "message": "Internal server error", "errors": [] }
+      }
+    }
+  }
+}

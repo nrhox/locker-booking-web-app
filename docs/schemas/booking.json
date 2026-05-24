@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.example.com/schemas/booking.json",
+  "type": "object",
+  "required": ["id", "userId", "lockerId", "locationId", "status", "startAt", "endAt", "createdAt", "updatedAt"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "userId": { "type": "string", "format": "uuid" },
+    "lockerId": { "type": "string", "format": "uuid" },
+    "locationId": { "type": "string", "format": "uuid" },
+    "status": { "type": "string", "enum": ["ACTIVE", "COMPLETED", "CANCELLED", "EXPIRED"] },
+    "startAt": { "type": "string", "format": "date-time" },
+    "endAt": { "type": "string", "format": "date-time" },
+    "cancelledAt": { "type": ["string", "null"], "format": "date-time" },
+    "completedAt": { "type": ["string", "null"], "format": "date-time" },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" }
+  }
+}

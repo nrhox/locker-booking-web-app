@@ -1,0 +1,63 @@
+{
+  "openLocker": {
+    "post": {
+      "tags": ["Locker Access"],
+      "operationId": "openLocker",
+      "summary": "Open locker",
+      "description": "Opens a locker for the authenticated user when they own an ACTIVE booking and current server time is within [startAt, endAt). A locker may be opened multiple times during an active booking, but only once every 3 minutes per locker and booking.",
+      "parameters": [{ "$ref": "../components/parameters.json#/publicId" }],
+      "responses": {
+        "200": {
+          "description": "Open command accepted.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["message", "data"],
+                "additionalProperties": false,
+                "properties": {
+                  "message": { "type": "string", "examples": ["Locker opened successfully"] },
+                  "data": { "$ref": "../schemas/access-log.json" }
+                }
+              }
+            }
+          }
+        },
+        "401": { "$ref": "../components/responses.json#/Unauthorized" },
+        "404": { "$ref": "../components/responses.json#/NotFound" },
+        "409": { "$ref": "../components/responses.json#/Conflict" },
+        "429": { "$ref": "../components/responses.json#/RateLimited" }
+      }
+    }
+  },
+  "closeLocker": {
+    "post": {
+      "tags": ["Locker Access"],
+      "operationId": "closeLocker",
+      "summary": "Close locker",
+      "description": "Closes a locker for the authenticated user when they own an ACTIVE booking and current server time is within [startAt, endAt). Close commands are not subject to the 3 minute open-rate rule.",
+      "parameters": [{ "$ref": "../components/parameters.json#/publicId" }],
+      "responses": {
+        "200": {
+          "description": "Close command accepted.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["message", "data"],
+                "additionalProperties": false,
+                "properties": {
+                  "message": { "type": "string", "examples": ["Locker closed successfully"] },
+                  "data": { "$ref": "../schemas/access-log.json" }
+                }
+              }
+            }
+          }
+        },
+        "401": { "$ref": "../components/responses.json#/Unauthorized" },
+        "404": { "$ref": "../components/responses.json#/NotFound" },
+        "409": { "$ref": "../components/responses.json#/Conflict" }
+      }
+    }
+  }
+}

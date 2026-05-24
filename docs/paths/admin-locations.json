@@ -1,0 +1,106 @@
+{
+  "adminLocations": {
+    "post": {
+      "tags": ["Admin Locations"],
+      "operationId": "createLocation",
+      "summary": "Create location",
+      "description": "Admin role required.",
+      "requestBody": {
+        "required": true,
+        "content": { "application/json": { "schema": { "$ref": "../schemas/create-location-request.json" } } }
+      },
+      "responses": {
+        "201": {
+          "description": "Location created.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["message", "data"],
+                "additionalProperties": false,
+                "properties": {
+                  "message": { "type": "string", "examples": ["Location created successfully"] },
+                  "data": { "$ref": "../schemas/location.json" }
+                }
+              }
+            }
+          }
+        },
+        "401": { "$ref": "../components/responses.json#/Unauthorized" },
+        "403": { "$ref": "../components/responses.json#/Forbidden" },
+        "409": { "$ref": "../components/responses.json#/Conflict" },
+        "422": { "$ref": "../components/responses.json#/UnprocessableEntity" }
+      }
+    }
+  },
+  "adminLocationById": {
+    "patch": {
+      "tags": ["Admin Locations"],
+      "operationId": "updateLocation",
+      "summary": "Update location",
+      "description": "Admin role required.",
+      "parameters": [{ "$ref": "../components/parameters.json#/publicId" }],
+      "requestBody": {
+        "required": true,
+        "content": { "application/json": { "schema": { "$ref": "../schemas/update-location-request.json" } } }
+      },
+      "responses": {
+        "200": {
+          "description": "Location updated.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["message", "data"],
+                "additionalProperties": false,
+                "properties": {
+                  "message": { "type": "string", "examples": ["Location updated successfully"] },
+                  "data": { "$ref": "../schemas/location.json" }
+                }
+              }
+            }
+          }
+        },
+        "401": { "$ref": "../components/responses.json#/Unauthorized" },
+        "403": { "$ref": "../components/responses.json#/Forbidden" },
+        "404": { "$ref": "../components/responses.json#/NotFound" },
+        "409": { "$ref": "../components/responses.json#/Conflict" },
+        "422": { "$ref": "../components/responses.json#/UnprocessableEntity" }
+      }
+    },
+    "delete": {
+      "tags": ["Admin Locations"],
+      "operationId": "deleteLocation",
+      "summary": "Delete location",
+      "description": "Admin role required. Prefer soft delete when lockers or bookings exist.",
+      "parameters": [{ "$ref": "../components/parameters.json#/publicId" }],
+      "responses": {
+        "200": {
+          "description": "Location deleted.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["message", "data"],
+                "additionalProperties": false,
+                "properties": {
+                  "message": { "type": "string", "examples": ["Location deleted successfully"] },
+                  "data": {
+                    "type": "object",
+                    "required": ["deleted"],
+                    "additionalProperties": false,
+                    "properties": { "deleted": { "type": "boolean" } }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "401": { "$ref": "../components/responses.json#/Unauthorized" },
+        "403": { "$ref": "../components/responses.json#/Forbidden" },
+        "404": { "$ref": "../components/responses.json#/NotFound" },
+        "409": { "$ref": "../components/responses.json#/Conflict" }
+      }
+    }
+  }
+}

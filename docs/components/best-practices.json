@@ -1,0 +1,30 @@
+{
+  "responseShape": {
+    "success": { "message": "Success", "data": {} },
+    "paginatedSuccess": {
+      "message": "Success",
+      "data": [],
+      "meta": { "page": 1, "limit": 10, "total": 100, "totalPages": 10 }
+    },
+    "error": {
+      "message": "Validation error",
+      "errors": [{ "field": "fieldName", "message": "Human readable validation message" }]
+    }
+  },
+  "httpSemantics": [
+    "Use GET for reads, POST for creation/actions, PATCH for partial updates, and DELETE for cancellation/deletion.",
+    "Use 409 for booking overlap, invalid locker operational state, and deletion conflicts.",
+    "Use 422 for request validation failures.",
+    "Use 429 for the locker open once-per-3-minutes rule."
+  ],
+  "frontendCompatibility": [
+    "Keep response wrappers consistent so React query/client generation can normalize responses.",
+    "Keep visualization endpoint frontend-ready to avoid duplicating business rules in the SPA.",
+    "Keep OpenAPI operationId values stable to avoid breaking generated TypeScript clients."
+  ],
+  "productionReadiness": [
+    "Document every breaking API change under a new version.",
+    "Prefer soft delete for resources with historical bookings.",
+    "Use server-side authorization checks even when the frontend hides admin controls."
+  ]
+}

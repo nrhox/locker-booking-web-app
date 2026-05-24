@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.example.com/schemas/success-meta.json",
+  "type": "object",
+  "required": ["page", "limit", "total", "totalPages"],
+  "additionalProperties": false,
+  "properties": {
+    "page": { "type": "integer", "minimum": 1, "examples": [1] },
+    "limit": { "type": "integer", "minimum": 1, "maximum": 100, "examples": [10] },
+    "total": { "type": "integer", "minimum": 0, "examples": [100] },
+    "totalPages": { "type": "integer", "minimum": 0, "examples": [10] }
+  }
+}

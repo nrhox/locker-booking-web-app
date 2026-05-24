@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.example.com/schemas/update-location-request.json",
+  "type": "object",
+  "minProperties": 1,
+  "additionalProperties": false,
+  "properties": {
+    "name": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "code": { "type": "string", "pattern": "^[A-Z0-9_-]{2,32}$" },
+    "description": { "type": ["string", "null"], "maxLength": 1000 },
+    "address": { "type": ["string", "null"], "maxLength": 500 },
+    "status": { "type": "string", "enum": ["ACTIVE", "INACTIVE"] },
+    "timezone": { "type": "string" }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "docs": {
+    "openapi.json": "Root OpenAPI 3.1 document.",
+    "structure.json": "Folder structure map.",
+    "schemas": [
+      "access-log.json",
+      "auth-session.json",
+      "booking.json",
+      "create-booking-request.json",
+      "create-location-request.json",
+      "create-locker-request.json",
+      "error-response.json",
+      "location.json",
+      "locker.json",
+      "locker-visualization.json",
+      "logout-request.json",
+      "refresh-token-request.json",
+      "success-meta.json",
+      "token-pair.json",
+      "update-location-request.json",
+      "update-locker-request.json",
+      "user.json"
+    ],
+    "paths": [
+      "admin-bookings.json",
+      "admin-locations.json",
+      "admin-lockers.json",
+      "auth.json",
+      "bookings.json",
+      "locations.json",
+      "locker-access.json",
+      "lockers.json",
+      "oauth.json"
+    ],
+    "components": [
+      "best-practices.json",
+      "mongodb-recommendations.json",
+      "naming-conventions.json",
+      "parameters.json",
+      "responses.json",
+      "scalability-recommendations.json",
+      "security-recommendations.json",
+      "securitySchemes.json"
+    ],
+    "examples": [
+      "booking-create-success.json",
+      "locker-visualization-success.json"
+    ]
+  }
+}

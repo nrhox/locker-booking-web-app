@@ -1,0 +1,106 @@
+{
+  "adminLockers": {
+    "post": {
+      "tags": ["Admin Lockers"],
+      "operationId": "createLocker",
+      "summary": "Create locker",
+      "description": "Admin role required. Locker status is a permanent operational state only: AVAILABLE, MAINTENANCE, or DISABLED.",
+      "requestBody": {
+        "required": true,
+        "content": { "application/json": { "schema": { "$ref": "../schemas/create-locker-request.json" } } }
+      },
+      "responses": {
+        "201": {
+          "description": "Locker created.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["message", "data"],
+                "additionalProperties": false,
+                "properties": {
+                  "message": { "type": "string", "examples": ["Locker created successfully"] },
+                  "data": { "$ref": "../schemas/locker.json" }
+                }
+              }
+            }
+          }
+        },
+        "401": { "$ref": "../components/responses.json#/Unauthorized" },
+        "403": { "$ref": "../components/responses.json#/Forbidden" },
+        "409": { "$ref": "../components/responses.json#/Conflict" },
+        "422": { "$ref": "../components/responses.json#/UnprocessableEntity" }
+      }
+    }
+  },
+  "adminLockerById": {
+    "patch": {
+      "tags": ["Admin Lockers"],
+      "operationId": "updateLocker",
+      "summary": "Update locker",
+      "description": "Admin role required. Use this endpoint to disable a locker or move it into maintenance.",
+      "parameters": [{ "$ref": "../components/parameters.json#/publicId" }],
+      "requestBody": {
+        "required": true,
+        "content": { "application/json": { "schema": { "$ref": "../schemas/update-locker-request.json" } } }
+      },
+      "responses": {
+        "200": {
+          "description": "Locker updated.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["message", "data"],
+                "additionalProperties": false,
+                "properties": {
+                  "message": { "type": "string", "examples": ["Locker updated successfully"] },
+                  "data": { "$ref": "../schemas/locker.json" }
+                }
+              }
+            }
+          }
+        },
+        "401": { "$ref": "../components/responses.json#/Unauthorized" },
+        "403": { "$ref": "../components/responses.json#/Forbidden" },
+        "404": { "$ref": "../components/responses.json#/NotFound" },
+        "409": { "$ref": "../components/responses.json#/Conflict" },
+        "422": { "$ref": "../components/responses.json#/UnprocessableEntity" }
+      }
+    },
+    "delete": {
+      "tags": ["Admin Lockers"],
+      "operationId": "deleteLocker",
+      "summary": "Delete locker",
+      "description": "Admin role required. Deletion should be rejected when active or future bookings exist.",
+      "parameters": [{ "$ref": "../components/parameters.json#/publicId" }],
+      "responses": {
+        "200": {
+          "description": "Locker deleted.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["message", "data"],
+                "additionalProperties": false,
+                "properties": {
+                  "message": { "type": "string", "examples": ["Locker deleted successfully"] },
+                  "data": {
+                    "type": "object",
+                    "required": ["deleted"],
+                    "additionalProperties": false,
+                    "properties": { "deleted": { "type": "boolean" } }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "401": { "$ref": "../components/responses.json#/Unauthorized" },
+        "403": { "$ref": "../components/responses.json#/Forbidden" },
+        "404": { "$ref": "../components/responses.json#/NotFound" },
+        "409": { "$ref": "../components/responses.json#/Conflict" }
+      }
+    }
+  }
+}

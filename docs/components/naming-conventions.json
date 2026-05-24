@@ -1,0 +1,14 @@
+{
+  "json": "Use camelCase for all request and response fields.",
+  "resources": "Use plural resource names: locations, lockers, bookings.",
+  "ids": "Use id for public resource identifiers and suffix references with Id, for example lockerId and locationId.",
+  "statusEnums": "Use uppercase enum values such as ACTIVE, CANCELLED, AVAILABLE, MAINTENANCE, and DISABLED.",
+  "datetime": "Use ISO 8601 UTC date-time strings for all datetime fields.",
+  "adminEndpoints": "Keep admin endpoints under /api/v1/admin/*.",
+  "avoidanceRules": [
+    "Do not use BOOKED, OPEN, CLOSED, or OCCUPIED as permanent locker status.",
+    "Do not expose raw MongoDB ObjectId.",
+    "Do not use dynamic object keys in errors.",
+    "Do not over-nest beyond necessary ownership or discovery paths."
+  ]
+}

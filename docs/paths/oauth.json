@@ -1,0 +1,76 @@
+{
+  "oauthAuthorize": {
+    "get": {
+      "tags": ["OAuth"],
+      "operationId": "startOAuthLogin",
+      "summary": "Start OAuth 2.0 login",
+      "description": "Redirects the browser to the selected OAuth provider. Provider implementations must use a shared provider abstraction for google, github, microsoft, and apple.",
+      "security": [],
+      "parameters": [
+        { "$ref": "../components/parameters.json#/oauthProvider" },
+        {
+          "name": "redirectUri",
+          "in": "query",
+          "required": false,
+          "schema": { "type": "string", "format": "uri" },
+          "description": "Optional frontend redirect target registered in the backend allowlist."
+        }
+      ],
+      "responses": {
+        "302": {
+          "description": "Redirect to OAuth provider authorization URL.",
+          "headers": {
+            "Location": {
+              "description": "Provider authorization URL.",
+              "schema": { "type": "string", "format": "uri" }
+            }
+          }
+        },
+        "400": { "$ref": "../components/responses.json#/BadRequest" }
+      }
+    }
+  },
+  "oauthCallback": {
+    "get": {
+      "tags": ["OAuth"],
+      "operationId": "handleOAuthCallback",
+      "summary": "Handle OAuth 2.0 callback",
+      "description": "Validates provider callback, upserts or links the user, creates a refresh session, and redirects to the frontend with an authorization result. API clients may request JSON by sending Accept: application/json.",
+      "security": [],
+      "parameters": [
+        { "$ref": "../components/parameters.json#/oauthProvider" },
+        { "name": "code", "in": "query", "required": true, "schema": { "type": "string" } },
+        { "name": "state", "in": "query", "required": true, "schema": { "type": "string" } }
+      ],
+      "responses": {
+        "200": {
+          "description": "OAuth callback completed and session returned for API clients.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["message", "data"],
+                "additionalProperties": false,
+                "properties": {
+                  "message": { "type": "string", "examples": ["Login successful"] },
+                  "data": { "$ref": "../schemas/auth-session.json" }
+                }
+              }
+            }
+          }
+        },
+        "302": {
+          "description": "Redirect to frontend application after successful browser OAuth flow.",
+          "headers": {
+            "Location": {
+              "description": "Frontend callback URL.",
+              "schema": { "type": "string", "format": "uri" }
+            }
+          }
+        },
+        "400": { "$ref": "../components/responses.json#/BadRequest" },
+        "401": { "$ref": "../components/responses.json#/Unauthorized" }
+      }
+    }
+  }
+}

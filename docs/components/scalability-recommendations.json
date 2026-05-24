@@ -1,0 +1,23 @@
+{
+  "api": [
+    "Keep /api/v1 versioning stable for the React SPA.",
+    "Use pagination for list endpoints and cap limit at 100.",
+    "Prefer explicit filters over ad hoc query parameters.",
+    "Use operationId values as stable client generation names."
+  ],
+  "bookingConcurrency": [
+    "Create bookings through a single application service that performs locker status validation, overlap validation, and write in one atomic flow.",
+    "Use idempotency keys for booking creation if the frontend may retry POST requests.",
+    "Use server-side UTC clock for all booking validity decisions."
+  ],
+  "lockerVisualization": [
+    "Build visualization from lockers plus active bookings for a location at request time.",
+    "Cache very short-lived visualization responses only if invalidated after booking create/cancel/status changes.",
+    "Never persist AVAILABLE, OCCUPIED, or MY_BOOKING visualization status."
+  ],
+  "observability": [
+    "Add request id/correlation id to logs.",
+    "Track booking conflict rate, OAuth callback failures, refresh rotation failures, and locker command latency.",
+    "Keep access logs append-only for auditability."
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.example.com/schemas/locker.json",
+  "type": "object",
+  "required": ["id", "locationId", "code", "status", "createdAt", "updatedAt"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "locationId": { "type": "string", "format": "uuid" },
+    "code": { "type": "string", "pattern": "^[A-Z0-9_-]{1,32}$", "examples": ["A-001"] },
+    "label": { "type": ["string", "null"], "examples": ["Aisle A Locker 001"] },
+    "status": { "type": "string", "enum": ["AVAILABLE", "MAINTENANCE", "DISABLED"] },
+    "position": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "row": { "type": "integer", "minimum": 1 },
+        "column": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" }
+  }
+}

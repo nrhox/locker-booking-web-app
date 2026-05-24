@@ -1,0 +1,155 @@
+{
+  "bookings": {
+    "post": {
+      "tags": ["Bookings"],
+      "operationId": "createBooking",
+      "summary": "Create booking",
+      "description": "Creates a booking for the authenticated user. Booking is rejected when the locker is DISABLED or MAINTENANCE, when requested time is outside valid range, or when an overlapping blocking booking exists. Safe overlap validation: existing.startAt < requested.endAt && existing.endAt > requested.startAt for blocking statuses ACTIVE.",
+      "requestBody": {
+        "required": true,
+        "content": { "application/json": { "schema": { "$ref": "../schemas/create-booking-request.json" } } }
+      },
+      "responses": {
+        "201": {
+          "description": "Booking created.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["message", "data"],
+                "additionalProperties": false,
+                "properties": {
+                  "message": { "type": "string", "examples": ["Booking created successfully"] },
+                  "data": { "$ref": "../schemas/booking.json" }
+                }
+              },
+              "examples": { "success": { "$ref": "../examples/booking-create-success.json" } }
+            }
+          }
+        },
+        "401": { "$ref": "../components/responses.json#/Unauthorized" },
+        "404": { "$ref": "../components/responses.json#/NotFound" },
+        "409": { "$ref": "../components/responses.json#/Conflict" },
+        "422": { "$ref": "../components/responses.json#/UnprocessableEntity" }
+      }
+    }
+  },
+  "activeBooking": {
+    "get": {
+      "tags": ["Bookings"],
+      "operationId": "getActiveBookings",
+      "summary": "List current user's active bookings",
+      "description": "Returns bookings owned by the authenticated user with status ACTIVE and current server time within [startAt, endAt).",
+      "responses": {
+        "200": {
+          "description": "Active bookings returned.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["message", "data"],
+                "additionalProperties": false,
+                "properties": {
+                  "message": { "type": "string", "examples": ["Success"] },
+                  "data": { "type": "array", "items": { "$ref": "../schemas/booking.json" } }
+                }
+              }
+            }
+          }
+        },
+        "401": { "$ref": "../components/responses.json#/Unauthorized" }
+      }
+    }
+  },
+  "bookingHistory": {
+    "get": {
+      "tags": ["Bookings"],
+      "operationId": "listBookingHistory",
+      "summary": "List current user's booking history",
+      "parameters": [
+        { "$ref": "../components/parameters.json#/page" },
+        { "$ref": "../components/parameters.json#/limit" },
+        { "$ref": "../components/parameters.json#/sort" },
+        { "$ref": "../components/parameters.json#/bookingStatus" },
+        { "$ref": "../components/parameters.json#/from" },
+        { "$ref": "../components/parameters.json#/to" }
+      ],
+      "responses": {
+        "200": {
+          "description": "Paginated booking history returned.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["message", "data", "meta"],
+                "additionalProperties": false,
+                "properties": {
+                  "message": { "type": "string", "examples": ["Success"] },
+                  "data": { "type": "array", "items": { "$ref": "../schemas/booking.json" } },
+                  "meta": { "$ref": "../schemas/success-meta.json" }
+                }
+              }
+            }
+          }
+        },
+        "401": { "$ref": "../components/responses.json#/Unauthorized" }
+      }
+    }
+  },
+  "bookingById": {
+    "get": {
+      "tags": ["Bookings"],
+      "operationId": "getBooking",
+      "summary": "Get current user's booking detail",
+      "parameters": [{ "$ref": "../components/parameters.json#/publicId" }],
+      "responses": {
+        "200": {
+          "description": "Booking returned.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["message", "data"],
+                "additionalProperties": false,
+                "properties": {
+                  "message": { "type": "string", "examples": ["Success"] },
+                  "data": { "$ref": "../schemas/booking.json" }
+                }
+              }
+            }
+          }
+        },
+        "401": { "$ref": "../components/responses.json#/Unauthorized" },
+        "404": { "$ref": "../components/responses.json#/NotFound" }
+      }
+    },
+    "delete": {
+      "tags": ["Bookings"],
+      "operationId": "cancelBooking",
+      "summary": "Cancel current user's booking",
+      "description": "Cancels an owned booking when it has not already completed, expired, or been cancelled.",
+      "parameters": [{ "$ref": "../components/parameters.json#/publicId" }],
+      "responses": {
+        "200": {
+          "description": "Booking cancelled.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["message", "data"],
+                "additionalProperties": false,
+                "properties": {
+                  "message": { "type": "string", "examples": ["Booking cancelled successfully"] },
+                  "data": { "$ref": "../schemas/booking.json" }
+                }
+              }
+            }
+          }
+        },
+        "401": { "$ref": "../components/responses.json#/Unauthorized" },
+        "404": { "$ref": "../components/responses.json#/NotFound" },
+        "409": { "$ref": "../components/responses.json#/Conflict" }
+      }
+    }
+  }
+}

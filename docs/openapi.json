@@ -1,0 +1,105 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Online Locker Booking API",
+    "version": "1.0.0",
+    "summary": "Enterprise-grade REST API contract for an online locker booking system.",
+    "description": "API contract for campus or public-space locker booking. Authentication is OAuth 2.0 based with JWT access tokens and refresh tokens. Datetimes are ISO 8601 UTC strings. MongoDB ObjectId values must never be exposed to clients; all public identifiers are UUID/string values."
+  },
+  "servers": [
+    {
+      "url": "https://api.example.com",
+      "description": "Production"
+    },
+    {
+      "url": "http://localhost:3000",
+      "description": "Local development"
+    }
+  ],
+  "tags": [
+    { "name": "Auth", "description": "Session, token, and current user endpoints." },
+    { "name": "OAuth", "description": "OAuth 2.0 authorization endpoints using provider abstraction." },
+    { "name": "Locations", "description": "Public location discovery and locker visualization." },
+    { "name": "Admin Locations", "description": "Admin-only location management." },
+    { "name": "Lockers", "description": "Locker discovery and detail endpoints." },
+    { "name": "Admin Lockers", "description": "Admin-only locker management." },
+    { "name": "Bookings", "description": "User booking lifecycle endpoints." },
+    { "name": "Locker Access", "description": "Open and close commands for active bookings." },
+    { "name": "Admin Bookings", "description": "Admin-only booking visibility." }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/api/v1/auth/refresh": { "$ref": "./paths/auth.json#/authRefresh" },
+    "/api/v1/auth/logout": { "$ref": "./paths/auth.json#/authLogout" },
+    "/api/v1/auth/me": { "$ref": "./paths/auth.json#/authMe" },
+    "/api/v1/auth/oauth/{provider}": { "$ref": "./paths/oauth.json#/oauthAuthorize" },
+    "/api/v1/auth/oauth/{provider}/callback": { "$ref": "./paths/oauth.json#/oauthCallback" },
+    "/api/v1/locations": { "$ref": "./paths/locations.json#/locations" },
+    "/api/v1/locations/{id}": { "$ref": "./paths/locations.json#/locationById" },
+    "/api/v1/locations/{id}/locker-visualization": { "$ref": "./paths/locations.json#/lockerVisualization" },
+    "/api/v1/admin/locations": { "$ref": "./paths/admin-locations.json#/adminLocations" },
+    "/api/v1/admin/locations/{id}": { "$ref": "./paths/admin-locations.json#/adminLocationById" },
+    "/api/v1/locations/{id}/lockers": { "$ref": "./paths/lockers.json#/locationLockers" },
+    "/api/v1/lockers/{id}": { "$ref": "./paths/lockers.json#/lockerById" },
+    "/api/v1/admin/lockers": { "$ref": "./paths/admin-lockers.json#/adminLockers" },
+    "/api/v1/admin/lockers/{id}": { "$ref": "./paths/admin-lockers.json#/adminLockerById" },
+    "/api/v1/bookings": { "$ref": "./paths/bookings.json#/bookings" },
+    "/api/v1/bookings/active": { "$ref": "./paths/bookings.json#/activeBooking" },
+    "/api/v1/bookings/history": { "$ref": "./paths/bookings.json#/bookingHistory" },
+    "/api/v1/bookings/{id}": { "$ref": "./paths/bookings.json#/bookingById" },
+    "/api/v1/lockers/{id}/open": { "$ref": "./paths/locker-access.json#/openLocker" },
+    "/api/v1/lockers/{id}/close": { "$ref": "./paths/locker-access.json#/closeLocker" },
+    "/api/v1/admin/bookings": { "$ref": "./paths/admin-bookings.json#/adminBookings" }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": { "$ref": "./components/securitySchemes.json#/bearerAuth" },
+      "oauth2": { "$ref": "./components/securitySchemes.json#/oauth2" }
+    },
+    "parameters": {
+      "publicId": { "$ref": "./components/parameters.json#/publicId" },
+      "oauthProvider": { "$ref": "./components/parameters.json#/oauthProvider" },
+      "page": { "$ref": "./components/parameters.json#/page" },
+      "limit": { "$ref": "./components/parameters.json#/limit" },
+      "sort": { "$ref": "./components/parameters.json#/sort" },
+      "locationStatus": { "$ref": "./components/parameters.json#/locationStatus" },
+      "lockerStatus": { "$ref": "./components/parameters.json#/lockerStatus" },
+      "bookingStatus": { "$ref": "./components/parameters.json#/bookingStatus" },
+      "from": { "$ref": "./components/parameters.json#/from" },
+      "to": { "$ref": "./components/parameters.json#/to" }
+    },
+    "responses": {
+      "BadRequest": { "$ref": "./components/responses.json#/BadRequest" },
+      "Unauthorized": { "$ref": "./components/responses.json#/Unauthorized" },
+      "Forbidden": { "$ref": "./components/responses.json#/Forbidden" },
+      "NotFound": { "$ref": "./components/responses.json#/NotFound" },
+      "Conflict": { "$ref": "./components/responses.json#/Conflict" },
+      "RateLimited": { "$ref": "./components/responses.json#/RateLimited" },
+      "UnprocessableEntity": { "$ref": "./components/responses.json#/UnprocessableEntity" },
+      "InternalServerError": { "$ref": "./components/responses.json#/InternalServerError" }
+    },
+    "schemas": {
+      "ErrorResponse": { "$ref": "./schemas/error-response.json" },
+      "SuccessMeta": { "$ref": "./schemas/success-meta.json" },
+      "User": { "$ref": "./schemas/user.json" },
+      "AuthSession": { "$ref": "./schemas/auth-session.json" },
+      "TokenPair": { "$ref": "./schemas/token-pair.json" },
+      "Location": { "$ref": "./schemas/location.json" },
+      "Locker": { "$ref": "./schemas/locker.json" },
+      "LockerVisualization": { "$ref": "./schemas/locker-visualization.json" },
+      "Booking": { "$ref": "./schemas/booking.json" },
+      "AccessLog": { "$ref": "./schemas/access-log.json" },
+      "CreateLocationRequest": { "$ref": "./schemas/create-location-request.json" },
+      "UpdateLocationRequest": { "$ref": "./schemas/update-location-request.json" },
+      "CreateLockerRequest": { "$ref": "./schemas/create-locker-request.json" },
+      "UpdateLockerRequest": { "$ref": "./schemas/update-locker-request.json" },
+      "CreateBookingRequest": { "$ref": "./schemas/create-booking-request.json" },
+      "RefreshTokenRequest": { "$ref": "./schemas/refresh-token-request.json" },
+      "LogoutRequest": { "$ref": "./schemas/logout-request.json" }
+    }
+  }
+}

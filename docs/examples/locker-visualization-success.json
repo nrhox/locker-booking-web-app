@@ -1,0 +1,30 @@
+{
+  "summary": "Locker visualization with current user's booking",
+  "value": {
+    "message": "Success",
+    "data": {
+      "locationId": "cf726a74-52e9-46d1-a2c2-6f6c084bc4f6",
+      "generatedAt": "2026-05-24T02:10:00Z",
+      "lockers": [
+        {
+          "id": "a4374f6d-41a6-48a7-9987-01917c16dd97",
+          "code": "A-001",
+          "label": "Aisle A Locker 001",
+          "lockerStatus": "AVAILABLE",
+          "visualizationStatus": "MY_BOOKING",
+          "position": { "row": 1, "column": 1 },
+          "activeBookingId": "9d2c8a74-32f4-4b1a-8e20-d9cb1f8b9861"
+        },
+        {
+          "id": "ba8e42df-4d12-45d9-a0c8-ff6d717d7880",
+          "code": "A-002",
+          "label": "Aisle A Locker 002",
+          "lockerStatus": "AVAILABLE",
+          "visualizationStatus": "OCCUPIED",
+          "position": { "row": 1, "column": 2 },
+          "activeBookingId": null
+        }
+      ]
+    }
+  }
+}

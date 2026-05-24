@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.example.com/schemas/logout-request.json",
+  "type": "object",
+  "required": ["refreshToken"],
+  "additionalProperties": false,
+  "properties": {
+    "refreshToken": { "type": "string", "minLength": 20 },
+    "logoutAllDevices": { "type": "boolean", "default": false }
+  }
+}

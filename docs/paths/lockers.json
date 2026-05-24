@@ -1,0 +1,65 @@
+{
+  "locationLockers": {
+    "get": {
+      "tags": ["Lockers"],
+      "operationId": "listLocationLockers",
+      "summary": "List lockers for a location",
+      "parameters": [
+        { "$ref": "../components/parameters.json#/publicId" },
+        { "$ref": "../components/parameters.json#/page" },
+        { "$ref": "../components/parameters.json#/limit" },
+        { "$ref": "../components/parameters.json#/sort" },
+        { "$ref": "../components/parameters.json#/lockerStatus" }
+      ],
+      "responses": {
+        "200": {
+          "description": "Paginated lockers returned.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["message", "data", "meta"],
+                "additionalProperties": false,
+                "properties": {
+                  "message": { "type": "string", "examples": ["Success"] },
+                  "data": { "type": "array", "items": { "$ref": "../schemas/locker.json" } },
+                  "meta": { "$ref": "../schemas/success-meta.json" }
+                }
+              }
+            }
+          }
+        },
+        "401": { "$ref": "../components/responses.json#/Unauthorized" },
+        "404": { "$ref": "../components/responses.json#/NotFound" }
+      }
+    }
+  },
+  "lockerById": {
+    "get": {
+      "tags": ["Lockers"],
+      "operationId": "getLocker",
+      "summary": "Get locker detail",
+      "parameters": [{ "$ref": "../components/parameters.json#/publicId" }],
+      "responses": {
+        "200": {
+          "description": "Locker returned.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["message", "data"],
+                "additionalProperties": false,
+                "properties": {
+                  "message": { "type": "string", "examples": ["Success"] },
+                  "data": { "$ref": "../schemas/locker.json" }
+                }
+              }
+            }
+          }
+        },
+        "401": { "$ref": "../components/responses.json#/Unauthorized" },
+        "404": { "$ref": "../components/responses.json#/NotFound" }
+      }
+    }
+  }
+}

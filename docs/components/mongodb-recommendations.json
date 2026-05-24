@@ -1,0 +1,81 @@
+{
+  "summary": "MongoDB-oriented persistence recommendation for the locker booking API contract.",
+  "identifierPolicy": {
+    "publicId": "Use UUID/string id fields for every client-facing resource.",
+    "internalId": "MongoDB _id/ObjectId may exist internally but must never be returned in API responses.",
+    "foreignKeys": "Store userId, locationId, lockerId, and bookingId as public UUID/string values or maintain mapped internal references behind repository boundaries."
+  },
+  "collections": [
+    {
+      "name": "users",
+      "purpose": "OAuth identity, role, profile, and provider links.",
+      "fields": ["id", "role", "displayName", "email", "avatarUrl", "oauthProviders", "createdAt", "updatedAt"]
+    },
+    {
+      "name": "refreshTokens",
+      "purpose": "Refresh sessions, token rotation, revocation, and device/session metadata.",
+      "fields": ["id", "userId", "tokenHash", "familyId", "expiresAt", "revokedAt", "createdAt", "lastUsedAt"]
+    },
+    {
+      "name": "locations",
+      "purpose": "Locker location metadata.",
+      "fields": ["id", "name", "code", "description", "address", "status", "timezone", "createdAt", "updatedAt", "deletedAt"]
+    },
+    {
+      "name": "lockers",
+      "purpose": "Permanent locker inventory and operational status.",
+      "fields": ["id", "locationId", "code", "label", "status", "position", "createdAt", "updatedAt", "deletedAt"]
+    },
+    {
+      "name": "bookings",
+      "purpose": "Booking lifecycle. Occupancy is derived from ACTIVE bookings and current UTC time.",
+      "fields": ["id", "userId", "lockerId", "locationId", "status", "startAt", "endAt", "cancelledAt", "completedAt", "createdAt", "updatedAt"]
+    },
+    {
+      "name": "lockerAccessLogs",
+      "purpose": "Append-only open/close audit stream and 3 minute open throttle lookup.",
+      "fields": ["id", "userId", "lockerId", "bookingId", "action", "requestedAt", "allowed", "deniedReason"]
+    },
+    {
+      "name": "oauthStates",
+      "purpose": "Temporary OAuth state/PKCE verification records.",
+      "fields": ["id", "provider", "stateHash", "codeVerifierHash", "redirectUri", "expiresAt", "createdAt"]
+    }
+  ],
+  "indexes": [
+    { "collection": "users", "index": { "id": 1 }, "options": { "unique": true } },
+    { "collection": "users", "index": { "email": 1 }, "options": { "unique": true } },
+    { "collection": "users", "index": { "oauthProviders.provider": 1, "oauthProviders.providerUserId": 1 }, "options": { "unique": true } },
+    { "collection": "refreshTokens", "index": { "id": 1 }, "options": { "unique": true } },
+    { "collection": "refreshTokens", "index": { "tokenHash": 1 }, "options": { "unique": true } },
+    { "collection": "refreshTokens", "index": { "expiresAt": 1 }, "options": { "expireAfterSeconds": 0 } },
+    { "collection": "locations", "index": { "id": 1 }, "options": { "unique": true } },
+    { "collection": "locations", "index": { "code": 1 }, "options": { "unique": true, "partialFilterExpression": { "deletedAt": null } } },
+    { "collection": "lockers", "index": { "id": 1 }, "options": { "unique": true } },
+    { "collection": "lockers", "index": { "locationId": 1, "code": 1 }, "options": { "unique": true, "partialFilterExpression": { "deletedAt": null } } },
+    { "collection": "lockers", "index": { "locationId": 1, "status": 1, "position.row": 1, "position.column": 1 }, "options": {} },
+    { "collection": "bookings", "index": { "id": 1 }, "options": { "unique": true } },
+    { "collection": "bookings", "index": { "lockerId": 1, "status": 1, "startAt": 1, "endAt": 1 }, "options": {} },
+    { "collection": "bookings", "index": { "userId": 1, "status": 1, "startAt": -1 }, "options": {} },
+    { "collection": "bookings", "index": { "locationId": 1, "status": 1, "startAt": 1, "endAt": 1 }, "options": {} },
+    { "collection": "lockerAccessLogs", "index": { "id": 1 }, "options": { "unique": true } },
+    { "collection": "lockerAccessLogs", "index": { "bookingId": 1, "lockerId": 1, "action": 1, "requestedAt": -1 }, "options": {} },
+    { "collection": "lockerAccessLogs", "index": { "requestedAt": 1 }, "options": { "expireAfterSeconds": 31536000 } },
+    { "collection": "oauthStates", "index": { "expiresAt": 1 }, "options": { "expireAfterSeconds": 0 } }
+  ],
+  "bookingOverlapOptimization": {
+    "query": {
+      "lockerId": "requested.lockerId",
+      "status": { "$in": ["ACTIVE"] },
+      "startAt": { "$lt": "requested.endAt" },
+      "endAt": { "$gt": "requested.startAt" }
+    },
+    "transactionRecommendation": "Use a MongoDB transaction or equivalent atomic reservation workflow for create booking, with a retry strategy around write conflicts.",
+    "timePolicy": "Use server-side UTC time only. Treat booking interval as half-open: [startAt, endAt).",
+    "statusPolicy": "COMPLETED, CANCELLED, and EXPIRED bookings do not block new bookings."
+  },
+  "accessLogOptimization": {
+    "openThrottleLookup": "Find latest allowed OPEN log by bookingId, lockerId, action OPEN, sorted requestedAt descending. Reject if requestedAt is within 3 minutes.",
+    "auditRetention": "Use TTL only if retention policy allows it; otherwise archive to cold storage by time partition."
+  }
+}
