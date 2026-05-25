@@ -1,7 +1,6 @@
 import { PageHeader } from "@/components/shared/PageHeader";
 import { SectionContainer } from "@/components/shared/SectionContainer";
 import { UserAvatar } from "@/components/shared/UserAvatar";
-import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { ROUTES } from "@/constants/routes";
@@ -46,11 +45,6 @@ export function ProfilePage() {
                 <h2 className="text-xl font-semibold text-slate-950">
                   {user?.displayName ?? "User"}
                 </h2>
-                {user?.role ? (
-                  <Badge tone={user.role === "ADMIN" ? "info" : "success"}>
-                    {user.role}
-                  </Badge>
-                ) : null}
               </div>
               <p className="mt-1 text-sm text-slate-500">
                 {user?.email ?? "No email available"}
@@ -69,6 +63,12 @@ export function ProfilePage() {
               <dt className="text-sm text-slate-500">Email</dt>
               <dd className="mt-1 font-medium text-slate-950">
                 {user?.email ?? "-"}
+              </dd>
+            </div>
+            <div>
+              <dt className="text-sm text-slate-500">Provider</dt>
+              <dd className="mt-1 font-medium text-slate-950">
+                {user?.oauthProviders.map((v) => v.provider).join(", ") ?? "-"}
               </dd>
             </div>
           </dl>
