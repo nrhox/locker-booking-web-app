@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/Badge";
 import { ROUTES } from "@/constants/routes";
 import { dummyLocations } from "@/dummy/location.dummy";
 import type { Location } from "@/types/location";
-import { Eye, Plus } from "lucide-react";
+import { Eye, Pen, Plus } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export function AdminLocationsPage() {
@@ -32,13 +32,22 @@ export function AdminLocationsPage() {
       key: "detail",
       header: "",
       render: (location) => (
-        <Link
-          className="inline-flex h-9 items-center gap-2 rounded-md px-3 text-sm font-medium text-teal-700 hover:bg-teal-50"
-          to={ROUTES.adminLocationDetail(location.id)}
-        >
-          <Eye className="h-4 w-4" />
-          Detail
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link
+            className="inline-flex h-9 items-center gap-2 rounded-md px-3 text-sm font-medium text-teal-700 hover:bg-teal-50"
+            to={ROUTES.adminLocationDetail(location.id)}
+          >
+            <Eye className="size-4" />
+            Detail
+          </Link>
+          <Link
+            className="inline-flex h-9 items-center gap-2 rounded-md px-3 text-sm font-medium text-teal-700 hover:bg-teal-50"
+            to={ROUTES.adminLocationDetailEdit(location.id)}
+          >
+            <Pen className="size-4" />
+            Edit
+          </Link>
+        </div>
       ),
     },
   ];

@@ -75,7 +75,10 @@ export function AdminLocationCreatePage() {
     initialValues: { size: "MEDIUM", status: "AVAILABLE" },
     validationSchema: lockerSchema,
     onSubmit: (values, helpers) => {
-      console.log(values);
+      setLockerDrafts((state) => [
+        ...state,
+        { id: crypto.randomUUID(), size: values.size, status: values.status },
+      ]);
       helpers.resetForm();
     },
   });

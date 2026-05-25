@@ -3,11 +3,14 @@ import { TextareaField } from "@/components/forms/TextareaField";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { SectionContainer } from "@/components/shared/SectionContainer";
 import { Badge } from "@/components/ui/Badge";
+import { ButtonTheme } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { ROUTES } from "@/constants/routes";
 import { dummyLocations } from "@/dummy/location.dummy";
 import { dummyLockers } from "@/dummy/locker.dummy";
-import { useParams } from "react-router-dom";
+import { Pen } from "lucide-react";
+import { Link, useParams } from "react-router-dom";
 
 export function AdminLocationDetailPage() {
   const { id = "" } = useParams();
@@ -60,6 +63,15 @@ export function AdminLocationDetailPage() {
                 value={location.description ?? ""}
                 disabled
               />
+            </div>
+            <div className="mt-3 flex items-end">
+              <Link
+                to={ROUTES.adminLocationDetailEdit(id)}
+                className={ButtonTheme("primary")}
+              >
+                <Pen className="size-4" />
+                Edit
+              </Link>
             </div>
           </Card>
 
