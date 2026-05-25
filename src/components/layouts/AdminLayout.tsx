@@ -11,6 +11,7 @@ import {
   LogOut,
   MapPinned,
   Menu,
+  User,
 } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { NavLink, Outlet } from "react-router-dom";
@@ -19,6 +20,7 @@ const nav = [
   { label: "Dashboard", to: ROUTES.adminDashboard, icon: LayoutDashboard },
   { label: "Locations", to: ROUTES.adminLocations, icon: MapPinned },
   { label: "Bookings", to: ROUTES.adminBookings, icon: CalendarRange },
+  { label: "Users", to: ROUTES.adminUsers, icon: User },
 ];
 
 function AdminNav() {
