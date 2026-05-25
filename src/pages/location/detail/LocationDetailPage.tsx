@@ -1,12 +1,13 @@
+import { BookingForm } from "@/components/pages/bookings/BookingForm";
+import { LockerVisualizationGrid } from "@/components/pages/lockers/LockerGrid";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { SectionContainer } from "@/components/shared/SectionContainer";
 import { Card } from "@/components/ui/Card";
 import { ROUTES } from "@/constants/routes";
 import { dummyLocations } from "@/dummy/location.dummy";
 import { dummyLockerVisualizationResponse } from "@/dummy/locker.dummy";
-import { BookingForm } from "@/components/pages/bookings/BookingForm";
-import { LockerVisualizationGrid } from "@/components/pages/lockers/LockerGrid";
 import type { CreateBookingRequest } from "@/types/booking";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 export function LocationDetailPage() {
@@ -14,7 +15,7 @@ export function LocationDetailPage() {
   const navigate = useNavigate();
   const location = dummyLocations.find((v) => v.id === id);
   const visualization = dummyLockerVisualizationResponse.data;
-  const selectedLockerId = dummyLockerVisualizationResponse.data.locationId;
+  const [selectedLockerId, setSelectId] = useState<string>("");
 
   const submitBooking = (request: CreateBookingRequest) => {
     navigate(ROUTES.bookings);
@@ -31,7 +32,7 @@ export function LocationDetailPage() {
         <LockerVisualizationGrid
           lockers={visualization.lockers}
           selectedLockerId={selectedLockerId}
-          onSelect={(x) => console.log(x)}
+          onSelect={(id) => setSelectId(id)}
         />
         <Card className="h-fit">
           <h2 className="text-lg font-semibold text-slate-950">
