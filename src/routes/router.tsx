@@ -3,10 +3,14 @@ import { PublicLayout } from "@/components/layouts/PublicLayout";
 import { UserLayout } from "@/components/layouts/UserLayout";
 import { ROUTES } from "@/constants/routes";
 import { AdminBookingsPage } from "@/pages/admin/booking/AdminBookingsPage";
+import { AdminBookingDetailPage } from "@/pages/admin/booking/detail/AdminBookingDetailPage";
 import { AdminDashboardPage } from "@/pages/admin/dashboard/AdminDashboardPage";
 import { AdminLocationsPage } from "@/pages/admin/location/AdminLocationsPage";
 import { AdminLocationCreatePage } from "@/pages/admin/location/create/AdminLocationCreatePage";
 import { AdminLocationDetailPage } from "@/pages/admin/location/detail/AdminLocationDetailPage";
+import { AdminLocationEditPage } from "@/pages/admin/location/detail/edit/AdminLocationEditPage";
+import { AdminUsersPage } from "@/pages/admin/user/AdminUsersPage";
+import { AdminUserDetailPage } from "@/pages/admin/user/detail/AdminUserDetailPage";
 import { BookingPage } from "@/pages/booking/BookingPage";
 import { BookingDetailPage } from "@/pages/booking/detail/BookingDetailPage";
 import { HistoryPage } from "@/pages/history/HistoryPage";
@@ -82,7 +86,23 @@ export const router = createBrowserRouter([
         loader: () => null,
         element: <AdminLocationDetailPage />,
       },
+      {
+        path: "locations/:id/edit",
+        loader: () => null,
+        element: <AdminLocationEditPage />,
+      },
       { path: "bookings", loader: () => null, element: <AdminBookingsPage /> },
+      {
+        path: "bookings/:id",
+        loader: () => null,
+        element: <AdminBookingDetailPage />,
+      },
+      { path: "users", loader: () => null, element: <AdminUsersPage /> },
+      {
+        path: "users/:id",
+        loader: () => null,
+        element: <AdminUserDetailPage />,
+      },
     ],
   },
 ]);

@@ -8,5 +8,9 @@ export const ROUTES = {
   adminLocations: "/admin/locations",
   adminLocationNew: "/admin/locations/new",
   adminLocationDetail: (id: string) => `/admin/locations/${id}`,
+  adminLocationDetailEdit: (id: string) => `/admin/locations/${id}/edit`,
   adminBookings: "/admin/bookings",
+  adminBookingDetail: (id: string) => `/admin/bookings/${id}`,
+  adminUsers: "/admin/users",
+  adminUserDetail: (id: string) => `/admin/users/${id}`,
 } as const;
